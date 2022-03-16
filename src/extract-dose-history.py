@@ -20,8 +20,11 @@ def get5digitZip(rawZip):
     
 def updateZipCodeFilesForDrug(localBasePath, drugs):
   with open(localBasePath + "data/therapeutics/process-dates.csv", "r") as lastProcessed_file:
-    lastProcessedDate = lastProcessed_file.readline()
+    processDates = lastProcessed_file.readline().split(',')
+    lastProcessedDate = processDates[0]
+    stopProcessingDate = processDates[1]
     print("last processed: " + lastProcessedDate)
+    print("stop procesing: " + lastProcessedDate)
 
   newLastProcessedDate = None
   with open(localBasePath + "data/therapeutics/publish-events.json", "r") as read_file:
@@ -30,7 +33,7 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
 
       for publishing in publishings:
         updateDate = publishing["update_date"]
-        if updateDate > lastProcessedDate:
+        if updateDate > lastProcessedDate and updateDate < stopProcessingDate :
           urls.append(publishing["archive_link"]["url"])
           newLastProcessedDate = updateDate
 
@@ -53,7 +56,7 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
       while not os.path.exists(drugPath):
         os.mkdir(drugPath)
 
-  # calculate all zip codes, by looking at latest data file, if there is one.
+  # calculate all zip codes by processing from publish event after lastProcessedDate to stopProcessingDate
   if len(urls) == 0:
     print("complete. no new data to process.")
     sys.exit()
@@ -63,7 +66,7 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
   therapeuticsPath = localBasePath + 'data/therapeutics/'
   publishEventsPath = therapeuticsPath + 'publish-events/'
   while not os.path.exists(publishEventsPath):
-    os.mkdir(targetPath)
+    os.mkdir(publishEventsPath)
   mabsFile = publishEventsPath + filename
   therapeuticsFile = open(mabsFile, 'r', encoding='utf8')
   zipSet = set()
@@ -101,11 +104,11 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
             else:
               f.write(',')
           f.write('\n')
-  return newLastProcessedDate
+  return newLastProcessedDate, stopProcessingDate
 
 localBasePath = ""
-lastProcessedDate = updateZipCodeFilesForDrug(localBasePath, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab'])
+lastProcessedDate, stopProcessingDate = updateZipCodeFilesForDrug(localBasePath, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab'])
 with open(localBasePath + "data/therapeutics/process-dates.csv", "w") as lastProcessed_file:
-  lastProcessed_file.write(lastProcessedDate)
-  print("data/therapeutics/process-dates.csv to " + lastProcessedDate)
+  lastProcessed_file.write(lastProcessedDate + ',' + stopProcessingDate)
+  print("data/therapeutics/process-dates.csv set to: " + lastProcessedDate + ',' + stopProcessingDate)
 
