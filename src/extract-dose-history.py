@@ -82,7 +82,7 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
     reader = csv.reader(therapeuticsFile)
     for columns in reader:
       zip = get5digitZip(columns[6])
-      if zip != "00Zip" and (columns[8] in drugs) and zip[0] == '0':
+      if zip != "00Zip" and (columns[8] in drugs):
         zipSet.add(zip)
     therapeuticsFile.close()
 
