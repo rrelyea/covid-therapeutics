@@ -54,6 +54,9 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
   for drug in drugs:
       drugPath = localBasePath + 'data/therapeutics/' + drug.lower() + '/'
       if lastProcessedDate < "2020-03-02T00:00:00.000":
+        for root, directories, files in os.walk(drugPath):
+          for file in files:
+            os.remove(os.path.join(root, file))
         os.rmdir(drugPath)
       while not os.path.exists(drugPath):
         os.mkdir(drugPath)
