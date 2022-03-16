@@ -60,6 +60,9 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
         os.rmdir(drugPath)
       while not os.path.exists(drugPath):
         os.mkdir(drugPath)
+      while not os.path.exists(drugPath + 'dose-history-by-zip/'):
+        os.mkdir(drugPath + 'dose-history-by-zip/')
+      
 
   # calculate all zip codes by processing from publish event after lastProcessedDate to stopProcessingDate
   if len(urls) == 0:
@@ -100,7 +103,7 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
           if zip == zipCode and columns[8] in drugs:
             index = drugs.index(columns[8])
             if zipFile[index] == None:
-              zipFile[index] = open(therapeuticsPath + columns[8].lower() + '/dose-history/' + str(zipCode)+'.csv', "a",encoding='utf8')
+              zipFile[index] = open(therapeuticsPath + columns[8].lower() + '/dose-history-by-zip/' + str(zipCode)+'.csv', "a",encoding='utf8')
             f = zipFile[index]
             f.write(timeStamp + ',' + zip + ',' + provider)
             for i in range(9, 14):
