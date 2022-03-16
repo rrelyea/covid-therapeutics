@@ -53,15 +53,16 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
 
   for drug in drugs:
       drugPath = localBasePath + 'data/therapeutics/' + drug.lower() + '/'
+      doseHistoryPath = drugPath + 'dose-history-by-zip/'
       if lastProcessedDate < "2020-03-02T00:00:00.000" and os.path.exists(drugPath):
-        for root, directories, files in os.walk(drugPath):
+        for root, directories, files in os.walk(doseHistoryPath):
           for file in files:
             os.remove(os.path.join(root, file))
-        os.rmdir(drugPath)
+        os.rmdir(doseHistoryPath)
       while not os.path.exists(drugPath):
         os.mkdir(drugPath)
-      while not os.path.exists(drugPath + 'dose-history-by-zip/'):
-        os.mkdir(drugPath + 'dose-history-by-zip/')
+      while not os.path.exists(doseHistoryPath):
+        os.mkdir(doseHistoryPath)
       
 
   # calculate all zip codes by processing from publish event after lastProcessedDate to stopProcessingDate
