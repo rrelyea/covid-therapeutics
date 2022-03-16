@@ -21,18 +21,18 @@ jobs:
       shell: sh
     - name: Fetch latest dose data
       run: |-
-        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Evusheld" > data/therapeutics/evusheld-data.csv
-        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Paxlovid" > data/therapeutics/paxlovid-data.csv
-        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Bebtelovimab" > data/therapeutics/bebtelovimab-data.csv
-        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Sotrovimab" > data/therapeutics/sotrovimab-data.csv
+        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Evusheld" > data/therapeutics/evusheld/evusheld-providers.csv
+        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Paxlovid" > data/therapeutics/paxlovid/paxlovid-providers.csv
+        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Bebtelovimab" > data/therapeutics/bebtelovimab/bebtelovimab-providers.csv
+        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Sotrovimab" > data/therapeutics/sotrovimab/sotrovimab-providers.csv
         curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/j7fh-jg79.json" > data/therapeutics/publish-events.json
     
     - name: Sort therapeutics data by state, county, city, provider
       run: |-
-        python src/transform-mAbs-data.py data/therapeutics/evusheld-data.csv
-        python src/transform-mAbs-data.py data/therapeutics/paxlovid-data.csv
-        python src/transform-mAbs-data.py data/therapeutics/bebtelovimab-data.csv
-        python src/transform-mAbs-data.py data/therapeutics/sotrovimab-data.csv
+        python src/transform-mAbs-data.py data/therapeutics/evusheld/evusheld-providers.csv
+        python src/transform-mAbs-data.py data/therapeutics/paxlovid/paxlovid-providers.csv
+        python src/transform-mAbs-data.py data/therapeutics/bebtelovimab/bebtelovimab/bebtelovimab-providers.csv
+        python src/transform-mAbs-data.py data/therapeutics/sotrovimab/sotrovimab/sotrovimab-providers.csv
       shell: sh
     - name: Update zip code inventory history for all mAbs
       run: |-
