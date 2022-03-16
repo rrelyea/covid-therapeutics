@@ -109,7 +109,7 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
               else:
                 f.write(',')
             f.write('\n')
-    return newLastProcessedDate, stopProcessingDate
+  return newLastProcessedDate, stopProcessingDate
 
 localBasePath = ""
 lastProcessedDate, stopProcessingDate = updateZipCodeFilesForDrug(localBasePath, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab'])
