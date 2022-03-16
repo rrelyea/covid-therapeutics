@@ -43,6 +43,9 @@ def createCountyAdjacenyFiles(localBasePath):
     firstCountyInFile = None
     countiesPerStateFile = None
     
+    countiesPerStatePath = localBasePath + "data/counties/per-state/"
+    while not os.path.exists(countiesPerStatePath):
+      os.mkdir(countiesPerStatePath)
     while True:
       try:
         line = countiesFile.readline()
@@ -63,7 +66,7 @@ def createCountyAdjacenyFiles(localBasePath):
         if currentState != lastState:
           if countiesPerStateFile != None:
             countiesPerStateFile.close()
-          countiesPerStateFilePath = localBasePath + "data/counties/per-state/" + currentState + ".csv"
+          countiesPerStateFilePath = countiesPerStatePath + currentState + ".csv"
           countiesPerStateFile = open(countiesPerStateFilePath, 'w')
           countiesPerStateFile.write("< county >")
           lastState = currentState
