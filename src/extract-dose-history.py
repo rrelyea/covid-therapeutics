@@ -86,7 +86,7 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
         zipSet.add(zip)
     therapeuticsFile.close()
 
-    print('zip codes for ' + mabsFile + ':' + str(len(zipSet)))
+    print('zip codes for ' + mabsFile + ':' + str(len(zipSet)), flush=True)
 
     for zipCode in sorted(zipSet):
       # print(zipCode, end=', ', flush=True)
