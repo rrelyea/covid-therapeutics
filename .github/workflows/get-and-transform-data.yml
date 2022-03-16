@@ -1,0 +1,69 @@
+name: Get and transform latest covid therapeutics data
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron:  '6,26,46 * * * *'
+
+jobs:
+  scheduled:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out this repo
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: "0"
+
+    - name: Install Python Dependencies (PIP)
+      run: |-
+        pip install pandas
+      shell: sh
+    - name: Fetch latest dose data
+      run: |-
+        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Evusheld" > data/therapeutics/evusheld-data.csv
+        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Paxlovid" > data/therapeutics/paxlovid-data.csv
+        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Bebtelovimab" > data/therapeutics/bebtelovimab-data.csv
+        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Sotrovimab" > data/therapeutics/sotrovimab-data.csv
+        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/j7fh-jg79.json" > data/therapeutics/publish-events.json
+    
+    - name: Sort therapeutics data by state, county, city, provider
+      run: |-
+        python src/transform-mAbs-data.py data/therapeutics/evusheld-data.csv
+        python src/transform-mAbs-data.py data/therapeutics/paxlovid-data.csv
+        python src/transform-mAbs-data.py data/therapeutics/bebtelovimab-data.csv
+        python src/transform-mAbs-data.py data/therapeutics/sotrovimab-data.csv
+      shell: sh
+    - name: Update zip code inventory history for all mAbs
+      run: |-
+        python src/extract-dose-history.py
+      shell: sh
+    - name: Commit and push if it changed
+      run: |-
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Latest therapeutics data: ${timestamp}" || exit 0
+        git push
+
+
+    - name: download state population info from census.gov
+      run: |-
+        curl https://www2.census.gov/programs-surveys/popest/datasets/2020-2021/state/totals/NST-EST2021-alldata.csv > data/states/state-populations.csv
+    - name: download county adjacency info from census.gov
+      run: |-
+        curl https://www2.census.gov/geo/docs/reference/county_adjacency.txt > data/counties/county_adjacency.txt
+    - name: Expand county_adjacency.txt into individual county files and also create a county list per state in data/county-data/
+      run: |-
+        python src/transform-county-data.py onServer
+      shell: sh
+    - name: Commit and push if it changed
+      run: |-
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Latest state and county data: ${timestamp}" || exit 0
+        git push
+
