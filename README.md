@@ -1,26 +1,24 @@
-# Ways to view current Evusheld order/inventory data for all 50 states
+# Covid-Prevention Providers for Immunocompromosised
+- [rrelyea.github.io/evusheld](https://rrelyea.github.io/evusheld) - healthdata.gov data powered
 
-- Use https://rrelyea.github.io/evusheld
+# Covid-Therapeutic Providers
+- [rrelyea.github.io/paxlovid](https://rrelyea.github.io/paxlovid) - healthdata.gov data powered
+- [rrelyea.github.io/bebtelovimab](https://rrelyea.github.io/bebtelovimab) - healthdata.gov data powered
+- [rrelyea.github.io/sotrovimab](https://rrelyea.github.io/sotrovimab)  - healthdata.gov data powered
 
-  - or view same data in [a searchable map (HHS)](https://covid-19-therapeutics-locator-dhhs.hub.arcgis.com/), [Microsoft Excel](https://1drv.ms/x/s!AhC1RgsYG5Ltv55eBLmCP2tJomHPFQ?e=XbsTzD), [Google Sheets](https://docs.google.com/spreadsheets/d/14jiaYK5wzTWQ6o_dZogQjoOMWZopamrfAlWLBKWocLs/edit?usp=sharing), [CSV File](https://raw.githubusercontent.com/rrelyea/evusheld-locations-history/main/evusheld-data.csv), or [HealthData.gov](https://healthdata.gov/Health/COVID-19-Public-Therapeutic-Locator/rxn6-qnx8/data)
-  
+# Replacing previous Repository
+- [github.com/rrelyea/evusheld-locations-history](https://github.com/rrelyea/evusheld-locations-history) will be phased out soon, and all the sites will use the improved data on this "feed"
+
 # Where does this data comes from?
 HealthData.gov collects all medical facilities with Evusheld orders/inventory and publishes it to https://healthdata.gov/Health/COVID-19-Public-Therapeutic-Locator/rxn6-qnx8
 
 Every 20 minutes, this site:
-- check for a newer version of https://healthdata.gov/resource/rxn6-qnx8.csv?order_label=Evusheld
+- seperates each therapeutic into its own file
 - sorts it by state, county, city, providerName
-- saves it as [evusheld-data.csv](https://github.com/rrelyea/evusheld-locations-history/blob/main/evusheld-data.csv)
+- saves latest version to CSV file in [https://github.com/rrelyea/covid-therapeutics/tree/main/data/therapeutics](/data/therapeutics)
 
-HealthData.gov has been updating the data feed about 1 time per weekday)
-
-# How can we improve Evusheld dose flow to people who need it?
-- Read this set of suggestions...and send me ideas, or edit (wiki): [evusheld-requests](https://github.com/rrelyea/evusheld-locations-history/wiki/Evusheld-Requests)
-
-# Contact info for your state's health department
-- [state-health-departments.csv](https://github.com/rrelyea/evusheld-locations-history/blob/main/state-health-departments.csv) has web page and twitter accounts for most state health departments.
-  - open an issue, PR, or contact me with improvements.
+HealthData.gov has been updating the data feed 1-6 times per week
 
 # Contact/Feedback
 - Open an issue or pull request in this repository
-- or contact Rob Relyea at [@rrelyea](https://twitter.com/rrelyea) on twitter
+- or see contact info at bottom of any 
