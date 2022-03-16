@@ -53,6 +53,8 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
 
   for drug in drugs:
       drugPath = localBasePath + 'data/therapeutics/' + drug.lower() + '/'
+      if lastProcessedDate < "2020-03-02T00:00:00.000":
+        os.rmdir(drugPath)
       while not os.path.exists(drugPath):
         os.mkdir(drugPath)
 
@@ -61,50 +63,50 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
     print("complete. no new data to process.")
     sys.exit()
 
-  url = sorted(urls)[len(sorted(urls)) - 1]
-  filename = os.path.basename(urlparse(url).path)
-  therapeuticsPath = localBasePath + 'data/therapeutics/'
-  publishEventsPath = therapeuticsPath + 'publish-events/'
-  while not os.path.exists(publishEventsPath):
-    os.mkdir(publishEventsPath)
-  mabsFile = publishEventsPath + filename
-  therapeuticsFile = open(mabsFile, 'r', encoding='utf8')
-  zipSet = set()
-  reader = csv.reader(therapeuticsFile)
-  for columns in reader:
-    zip = get5digitZip(columns[6])
-    if zip != "00Zip" and (columns[8] in drugs) and zip[0] == '0':
-      zipSet.add(zip)
-  therapeuticsFile.close()
-
-  print('zip codes for ' + mabsFile + ':' + str(len(zipSet)))
-
-  for zipCode in sorted(zipSet):
-    # print(zipCode, end=', ', flush=True)
-    zipFile = [None] * len(drugs)
+  for url in sorted(urls):
     filename = os.path.basename(urlparse(url).path)
-    therapeuticsFile = publishEventsPath + filename
-    timeStamp = filename.replace('rxn6-qnx8_','').replace('.csv','')
-    with open(therapeuticsFile, 'r', encoding='utf8') as data:
-      reader = csv.reader(data)
-      for columns in reader:
-        zip = get5digitZip(columns[6])
-        provider = columns[0]
-        if "," in provider:
-          provider = '"' + provider + '"'
-        if zip == zipCode and columns[8] in drugs:
-          index = drugs.index(columns[8])
-          if zipFile[index] == None:
-            zipFile[index] = open(therapeuticsPath + columns[8].lower() + '/' + str(zipCode)+'.csv', "a",encoding='utf8')
-          f = zipFile[index]
-          f.write(timeStamp + ',' + zip + ',' + provider)
-          for i in range(9, 14):
-            if i < len(columns):
-              f.write(',' + columns[i])
-            else:
-              f.write(',')
-          f.write('\n')
-  return newLastProcessedDate, stopProcessingDate
+    therapeuticsPath = localBasePath + 'data/therapeutics/'
+    publishEventsPath = therapeuticsPath + 'publish-events/'
+    while not os.path.exists(publishEventsPath):
+      os.mkdir(publishEventsPath)
+    mabsFile = publishEventsPath + filename
+    therapeuticsFile = open(mabsFile, 'r', encoding='utf8')
+    zipSet = set()
+    reader = csv.reader(therapeuticsFile)
+    for columns in reader:
+      zip = get5digitZip(columns[6])
+      if zip != "00Zip" and (columns[8] in drugs) and zip[0] == '0':
+        zipSet.add(zip)
+    therapeuticsFile.close()
+
+    print('zip codes for ' + mabsFile + ':' + str(len(zipSet)))
+
+    for zipCode in sorted(zipSet):
+      # print(zipCode, end=', ', flush=True)
+      zipFile = [None] * len(drugs)
+      filename = os.path.basename(urlparse(url).path)
+      therapeuticsFile = publishEventsPath + filename
+      timeStamp = filename.replace('rxn6-qnx8_','').replace('.csv','')
+      with open(therapeuticsFile, 'r', encoding='utf8') as data:
+        reader = csv.reader(data)
+        for columns in reader:
+          zip = get5digitZip(columns[6])
+          provider = columns[0]
+          if "," in provider:
+            provider = '"' + provider + '"'
+          if zip == zipCode and columns[8] in drugs:
+            index = drugs.index(columns[8])
+            if zipFile[index] == None:
+              zipFile[index] = open(therapeuticsPath + columns[8].lower() + '/' + str(zipCode)+'.csv', "a",encoding='utf8')
+            f = zipFile[index]
+            f.write(timeStamp + ',' + zip + ',' + provider)
+            for i in range(9, 14):
+              if i < len(columns):
+                f.write(',' + columns[i])
+              else:
+                f.write(',')
+            f.write('\n')
+    return newLastProcessedDate, stopProcessingDate
 
 localBasePath = ""
 lastProcessedDate, stopProcessingDate = updateZipCodeFilesForDrug(localBasePath, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab'])
