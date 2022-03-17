@@ -17,6 +17,8 @@ def get5digitZip(rawZip):
     return rawZip 
   elif len(rawZip) > 5:
     return rawZip[0:5]
+  else:
+    return None
     
 def updateZipCodeFilesForDrug(localBasePath, drugs):
   with open(localBasePath + "data/therapeutics/process-dates.csv", "r") as lastProcessed_file:
@@ -82,8 +84,10 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
     reader = csv.reader(therapeuticsFile)
     for columns in reader:
       zip = get5digitZip(columns[6])
-      if zip != "00Zip" and (columns[8] in drugs):
+      if zip != "00Zip" and zip != None and (columns[8] in drugs):
         zipSet.add(zip)
+      else:
+        print("skipped" + str(columns))
     therapeuticsFile.close()
 
     print('zip codes for ' + mabsFile + ':' + str(len(zipSet)), flush=True)
