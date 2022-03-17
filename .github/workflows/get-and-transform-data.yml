@@ -34,10 +34,8 @@ jobs:
         python src/transform-mAbs-data.py data/therapeutics/bebtelovimab/bebtelovimab-providers.csv
         python src/transform-mAbs-data.py data/therapeutics/sotrovimab/sotrovimab-providers.csv
       shell: sh
-    - name: Update zip code inventory history for all mAbs
-      run: |-
-        python src/extract-dose-history.py
-      shell: sh
+
+
     - name: Commit and push if it changed
       run: |-
         git config user.name "Automated"
