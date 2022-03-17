@@ -19,7 +19,7 @@ def get5digitZip(rawZip):
     return rawZip[0:5]
   else:
     return None
-    
+   
 def updateZipCodeFilesForDrug(localBasePath, drugs):
   with open(localBasePath + "data/therapeutics/process-dates.csv", "r") as lastProcessed_file:
     processDates = lastProcessed_file.readline().split(',')
@@ -65,7 +65,7 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
         os.mkdir(drugPath)
       while not os.path.exists(doseHistoryPath):
         os.mkdir(doseHistoryPath)
-      
+     
 
   # calculate all zip codes by processing from publish event after lastProcessedDate to stopProcessingDate
   if len(urls) == 0:
@@ -86,14 +86,12 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
       zip = get5digitZip(columns[6])
       if zip != "00Zip" and zip != None and (columns[8] in drugs):
         zipSet.add(zip)
-      else:
+      elif columns[8] != "Molnupiravir":
         print("skipped" + str(columns))
     therapeuticsFile.close()
 
-    print('zip codes for ' + mabsFile + ':' + str(len(zipSet)), flush=True)
-
+    print('zip codes for ' + mabsFile + ': ' + str(len(zipSet)), flush=True)
     for zipCode in sorted(zipSet):
-      # print(zipCode, end=', ', flush=True)
       zipFile = [None] * len(drugs)
       filename = os.path.basename(urlparse(url).path)
       therapeuticsFile = publishEventsPath + filename
@@ -111,12 +109,18 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
               zipFile[index] = open(therapeuticsPath + columns[8].lower() + '/dose-history-by-zip/' + str(zipCode)+'.csv', "a",encoding='utf8')
             f = zipFile[index]
             f.write(timeStamp + ',' + zip + ',' + provider)
-            for i in range(9, 14):
-              if i < len(columns):
-                f.write(',' + columns[i])
-              else:
-                f.write(',')
-            f.write('\n')
+            if (timeStamp < "2022-03-16"):
+              for i in range(9, 14):
+                if i < len(columns):
+                  f.write(',' + columns[i])
+                else:
+                  f.write(',')
+            else:
+              f.write(",NLP") #allotted_update  - no longer published by healthdata.gov
+              f.write(",NLP") #last delivery    - no longer published by healthdata.gov
+              f.write(",NLP") #allotted doses   - no longer published by healthdata.gov
+              f.write("," + columns[9])     #available doses
+              f.write("," + columns[13])    #last report date
   return newLastProcessedDate, stopProcessingDate
 
 localBasePath = ""
@@ -124,4 +128,3 @@ lastProcessedDate, stopProcessingDate = updateZipCodeFilesForDrug(localBasePath,
 with open(localBasePath + "data/therapeutics/process-dates.csv", "w") as lastProcessed_file:
   lastProcessed_file.write(lastProcessedDate + ',' + stopProcessingDate)
   print("data/therapeutics/process-dates.csv set to: " + lastProcessedDate + ',' + stopProcessingDate)
-
