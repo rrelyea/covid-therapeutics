@@ -121,6 +121,7 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
               f.write(",NLP") #allotted doses   - no longer published by healthdata.gov
               f.write("," + columns[9])     #available doses
               f.write("," + columns[13])    #last report date
+            f.write('\n')
   return newLastProcessedDate, stopProcessingDate
 
 localBasePath = ""

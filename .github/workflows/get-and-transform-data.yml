@@ -1,7 +1,6 @@
 name: Get and transform latest covid therapeutics data
 
 on:
-  push:
   workflow_dispatch:
   schedule:
     - cron:  '6,26,46 * * * *'
