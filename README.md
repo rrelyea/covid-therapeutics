@@ -6,9 +6,6 @@
 - [rrelyea.github.io/bebtelovimab](https://rrelyea.github.io/bebtelovimab) - healthdata.gov data powered
 - [rrelyea.github.io/sotrovimab](https://rrelyea.github.io/sotrovimab)  - healthdata.gov data powered
 
-# Replacing previous Repository
-- [github.com/rrelyea/evusheld-locations-history](https://github.com/rrelyea/evusheld-locations-history) has been phased out, replaced by data here. It will be archived soon, but has some interesting history.
-
 # Where does this data comes from?
 HealthData.gov collects all medical facilities with Evusheld orders/inventory and publishes it to https://healthdata.gov/Health/COVID-19-Public-Therapeutic-Locator/rxn6-qnx8
 
@@ -18,6 +15,9 @@ Every 20 minutes, this site:
 - saves latest version to CSV file in [https://github.com/rrelyea/covid-therapeutics/tree/main/data/therapeutics](/data/therapeutics)
 
 HealthData.gov has been updating the data feed 1-6 times per week
+
+# Replaced rrelyea/evusheld-locations-history
+- [github.com/rrelyea/evusheld-locations-history](https://github.com/rrelyea/evusheld-locations-history) has been phased out, replaced by data here. It will be archived soon, but has some interesting history.
 
 # Contact/Feedback
 - Open an issue or pull request in this repository
