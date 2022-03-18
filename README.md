@@ -17,7 +17,7 @@ Every 20 minutes, this site:
 HealthData.gov has been updating the data feed 1-6 times per week
 
 # Replaced rrelyea/evusheld-locations-history
-- [github.com/rrelyea/evusheld-locations-history](https://github.com/rrelyea/evusheld-locations-history) has been phased out, replaced by data here. It will be archived soon, but has some interesting history.
+- [github.com/rrelyea/evusheld-locations-history](https://github.com/rrelyea/evusheld-locations-history) has been phased out, replaced by data here. It has been archived.
 
 # Contact/Feedback
 - Open an issue or pull request in this repository
