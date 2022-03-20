@@ -4,7 +4,6 @@ from io import StringIO
 import os
 import sys
 from os.path import exists
-import requests
 from urllib.parse import urlparse
 import csv
 
@@ -18,114 +17,63 @@ def get5digitZip(rawZip):
   elif len(rawZip) > 5:
     return rawZip[0:5]
   else:
-    return None
+    return ""
    
 def trackProviderAddsAndDeletes(localBasePath, drugs):
-  with open(localBasePath + "data/therapeutics/process-dates.csv", "r") as lastProcessed_file:
-    processDates = lastProcessed_file.readline().split(',')
-    lastProcessedDate = processDates[0]
-    stopProcessingDate = processDates[1]
-    print("last processed: " + lastProcessedDate)
-    print("stop procesing: " + lastProcessedDate)
+  states = list()
+  with open(localBasePath + "data/states/state-health-info.csv", "r") as states_file:
+    reader = csv.reader(states_file)
+    for columns in reader:
+      state_code = columns[3]
+      states.append(state_code)
 
-  newLastProcessedDate = None
   with open(localBasePath + "data/therapeutics/publish-events.json", "r") as read_file:
       publishings = json.load(read_file)
       urls = []
 
       for publishing in publishings:
         updateDate = publishing["update_date"]
-        if updateDate > lastProcessedDate and updateDate < stopProcessingDate :
-          urls.append(publishing["archive_link"]["url"])
-          newLastProcessedDate = updateDate
+        urls.append(publishing["archive_link"]["url"])
 
-  # download all new files
-  for url in sorted(urls):
-    filename = os.path.basename(urlparse(url).path)
-    publishEventPath = localBasePath + 'data/therapeutics/publish-events/'
-    while not os.path.exists(publishEventPath):
-      os.mkdir(publishEventPath)
-    mabsFile = publishEventPath + filename
-    if not exists(mabsFile):
-      print("downloading " + url)
-      r = requests.get(url, allow_redirects=True)
-      therapeuticsFile = open(mabsFile, 'wb')
-      therapeuticsFile.write(r.content)
-      therapeuticsFile.close()
+      for drug in drugs:
+        drugPath = localBasePath + 'data/therapeutics/' + drug.lower() + '/'
+        doseHistoryPath = drugPath + drug.lower() + '-providers-added-removed.csv'
+        with open(doseHistoryPath, "w") as doseHistory_file:
+          doseHistory_file.write("State Date       Time   Providers Details\n")
+          for state_code in states:
+            providers = list()
+            for url in sorted(urls):
+              lastProviders = providers
+              filename = os.path.basename(urlparse(url).path)
+              therapeuticsPath = localBasePath + 'data/therapeutics/'
+              publishEventsPath = therapeuticsPath + 'publish-events/'
+              mabsFile = publishEventsPath + filename
+              therapeuticsFile = open(mabsFile, 'r', encoding='utf8')
+              providers = list()
+              reader = csv.reader(therapeuticsFile)
+              for columns in reader:
+                state = columns[5].upper()
+                if state == state_code:
+                  order_label = columns[8]
+                  if order_label == drug:
+                    provider = columns[0].title()
+                    city = columns[3].title()
+                    zip = get5digitZip(columns[6])
+                    providers.append(state + "," + city + "," + zip + "," + provider)
+              therapeuticsFile.close()
 
-  for drug in drugs:
-      drugPath = localBasePath + 'data/therapeutics/' + drug.lower() + '/'
-      doseHistoryPath = drugPath + 'dose-history-by-zip/'
-      if lastProcessedDate < "2020-03-02T00:00:00.000" and os.path.exists(drugPath):
-        for root, directories, files in os.walk(doseHistoryPath):
-          for file in files:
-            os.remove(os.path.join(root, file))
-        os.rmdir(doseHistoryPath)
-      while not os.path.exists(drugPath):
-        os.mkdir(drugPath)
-      while not os.path.exists(doseHistoryPath):
-        os.mkdir(doseHistoryPath)
-     
-
-  # calculate all zip codes by processing from publish event after lastProcessedDate to stopProcessingDate
-  if len(urls) == 0:
-    print("complete. no new data to process.")
-    sys.exit()
-
-  for url in sorted(urls):
-    filename = os.path.basename(urlparse(url).path)
-    therapeuticsPath = localBasePath + 'data/therapeutics/'
-    publishEventsPath = therapeuticsPath + 'publish-events/'
-    while not os.path.exists(publishEventsPath):
-      os.mkdir(publishEventsPath)
-    mabsFile = publishEventsPath + filename
-    therapeuticsFile = open(mabsFile, 'r', encoding='utf8')
-    zipSet = set()
-    reader = csv.reader(therapeuticsFile)
-    for columns in reader:
-      zip = get5digitZip(columns[6])
-      if zip != "00Zip" and zip != None and (columns[8] in drugs):
-        zipSet.add(zip)
-      elif columns[8] != "Molnupiravir":
-        print("skipped" + str(columns))
-    therapeuticsFile.close()
-
-    print('zip codes for ' + mabsFile + ': ' + str(len(zipSet)), flush=True)
-    for zipCode in sorted(zipSet):
-      zipFile = [None] * len(drugs)
-      filename = os.path.basename(urlparse(url).path)
-      therapeuticsFile = publishEventsPath + filename
-      timeStamp = filename.replace('rxn6-qnx8_','').replace('.csv','')
-      with open(therapeuticsFile, 'r', encoding='utf8') as data:
-        reader = csv.reader(data)
-        for columns in reader:
-          zip = get5digitZip(columns[6])
-          provider = columns[0]
-          if "," in provider:
-            provider = '"' + provider + '"'
-          if zip == zipCode and columns[8] in drugs:
-            index = drugs.index(columns[8])
-            if zipFile[index] == None:
-              zipFile[index] = open(therapeuticsPath + columns[8].lower() + '/dose-history-by-zip/' + str(zipCode)+'.csv', "a",encoding='utf8')
-            f = zipFile[index]
-            f.write(timeStamp + ',' + zip + ',' + provider)
-            if (timeStamp < "2022-03-16"):
-              for i in range(9, 14):
-                if i < len(columns):
-                  f.write(',' + columns[i])
-                else:
-                  f.write(',')
-            else:
-              f.write(",NLP") #allotted_update  - no longer published by healthdata.gov
-              f.write(",NLP") #last delivery    - no longer published by healthdata.gov
-              f.write(",NLP") #allotted doses   - no longer published by healthdata.gov
-              f.write("," + columns[9])     #available doses
-              f.write("," + columns[13])    #last report date
-            f.write('\n')
-  return newLastProcessedDate, stopProcessingDate
+              if len(lastProviders) > 0:
+                added = list(set(providers) - set(lastProviders))
+                added.sort()
+                removed = list(set(lastProviders) - set(providers))
+                removed.sort()
+                if len(added) > 0:
+                  doseHistory_file.write(state_code + "    " + filename[10:20] + " " + filename[21:26] + "  +" + "{:<9}".format(str(len(added))))
+                  doseHistory_file.write(str(added) + '\n')
+                if len(removed) > 0:
+                  doseHistory_file.write(state_code + "    " + filename[10:20] + " " + filename[21:26] + "  -" + "{:<9}".format(str(len(removed))))
+                  doseHistory_file.write(str(removed) + '\n')
+  return
 
 localBasePath = ""
-lastProcessedDate, stopProcessingDate = trackProviderAddsAndDeletes(localBasePath, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab'])
-with open(localBasePath + "data/therapeutics/process-dates.csv", "w") as lastProcessed_file:
-  lastProcessed_file.write(lastProcessedDate + ',' + stopProcessingDate)
-  print("data/therapeutics/process-dates.csv set to: " + lastProcessedDate + ',' + stopProcessingDate)
+trackProviderAddsAndDeletes(localBasePath, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab'])
