@@ -12,7 +12,7 @@
 - "We offer a guide to protecting the elderly, immunocompromised and unvaccinated from Covid."
 > Many people don’t know Evusheld exists or don’t know how to find out if they’re eligible and how to get a shot.
 
-> Rob Relyea, an engineer at Microsoft whose wife has cancer, has created an online resource, in the absence of information from official sources. The country needs a “better communication plan around Evusheld,” Relyea tweeted. “Each hospital should proactively reach out to immunocompromised patients.”
+> Rob Relyea, an engineer at Microsoft whose wife has cancer, has created [an online resource](https://rrelyea.github.io/evusheld/), in the absence of information from official sources. The country needs a “better communication plan around Evusheld,” Relyea tweeted. “Each hospital should proactively reach out to immunocompromised patients.”
 
 > The confusion around Evusheld is another example of how the fragmented U.S. health care system harms people."
 
@@ -21,7 +21,7 @@
 
 ### [High Demand for Drug to Prevent Covid in the Vulnerable, Yet Doses Go Unused](https://www.nytimes.com/2022/03/06/us/politics/evusheld-covid-treatment.html), nytimes.com, 2022-03-06, Amanda Morris and Sheryl Gay Stolberg
 - "The treatment could be lifesaving for many who cannot get protection from the vaccine, but confusion about the drug has made some doctors slow to prescribe it."
-> Evusheld’s arrival in December immediately set off a scramble. In Facebook groups and online messages, patients and their loved ones began swapping information about how to get it. Government data sets about Evusheld’s availability were so complex and confusing that a software developer in the Seattle area, Rob Relyea, developed his own mapping tool that tracks how much of the drug is available and which providers have it.
+> Evusheld’s arrival in December immediately set off a scramble. In Facebook groups and online messages, patients and their loved ones began swapping information about how to get it. Government data sets about Evusheld’s availability were so complex and confusing that a software developer in the Seattle area, Rob Relyea, developed his own [mapping tool](https://rrelyea.github.io/evusheld/) that tracks how much of the drug is available and which providers have it.
 
 > “People should know where to go to get in line,” he said.
 
