@@ -1,7 +1,7 @@
 ### [The F.D.A. authorizes an AstraZeneca drug to protect people with immune problems](https://www.nytimes.com/2021/12/08/business/fda-authorizes-astrazeneca-drug-immunocompromised.html), nytimes.com, 2021-12-08, Rebecca Robbins
 - Covers Evusheld announcement from FDA.
 
-### [Patchwork system for rationing a Covid drug sends immunocompromised patients on a ‘Hunger Games hunt’](https://www.statnews.com/2022/01/27/patchwork-system-for-rationing-covid-drug-sends-patients-on-hunger-games-hunt/), statnew.com, 2022-01-27, Eric Boodman
+### [Patchwork system for rationing a Covid drug sends immunocompromised patients on a ‘Hunger Games hunt’](https://www.statnews.com/2022/01/27/patchwork-system-for-rationing-covid-drug-sends-patients-on-hunger-games-hunt/), statnews.com, 2022-01-27, Eric Boodman
 - Covers Evusheld rationing and hunt.
 > "A Microsoft engineer — on leave from work to care for his wife during her lymphoma treatment — wrote software to scrape a confusing federal database, making doses easier to find."
 
