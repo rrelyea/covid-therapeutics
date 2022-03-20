@@ -1,8 +1,13 @@
 ### [The F.D.A. authorizes an AstraZeneca drug to protect people with immune problems](https://www.nytimes.com/2021/12/08/business/fda-authorizes-astrazeneca-drug-immunocompromised.html), nytimes.com, 2021-12-08, Rebecca Robbins
 - Covers Evusheld announcement from FDA.
 
+### [Hospitals use a lottery to allocate scarce COVID drugs for the immunocompromised](https://www.npr.org/sections/health-shots/2022/01/25/1075432400/hospitals-use-a-lottery-to-allocate-scarce-covid-drugs-for-the-immunocompromised), npr.org, 2022-01-25, Pien Huang
+> Dr. Vivian Cheung takes steroids to manage a rare genetic disease. The drugs suppress her immune system, which puts her at high risk of getting very sick from COVID-19. It also means that her body didn't really make antibodies in response to two shots she got of the Moderna COVID-19 vaccine.
+
+> Cheung is a pediatrician and research scientist. Before the coronavirus pandemic, she flew weekly from her clinic at the National Institutes of Health in Maryland to her lab at the University of Michigan. Now she hasn't been to her lab in two years. "Except for work, I don't go out at all," she says. "I haven't been inside of a grocery store for over a year."
+
+
 ### [Patchwork system for rationing a Covid drug sends immunocompromised patients on a ‘Hunger Games hunt’](https://www.statnews.com/2022/01/27/patchwork-system-for-rationing-covid-drug-sends-patients-on-hunger-games-hunt/), statnews.com, 2022-01-27, Eric Boodman
-- Covers Evusheld rationing and hunt.
 > "A Microsoft engineer — on leave from work to care for his wife during her lymphoma treatment — wrote software to scrape a confusing federal database, making doses easier to find."
 
 ### [After wife got cancer, Microsoft engineer built a tool to locate anti-COVID drug for immunocompromised](https://www.geekwire.com/2022/after-wife-got-cancer-microsoft-engineer-built-a-tool-to-locate-anti-covid-drug-for-immunocompromised/), geekwire.com, 2022-02-16, Kurt Schlosser
