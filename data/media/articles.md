@@ -1,3 +1,6 @@
+### [FDA Authorizes New Long-Acting Monoclonal Antibodies for Pre-exposure Prevention of COVID-19 in Certain Individuals](https://www.fda.gov/news-events/press-announcements/coronavirus-covid-19-update-fda-authorizes-new-long-acting-monoclonal-antibodies-pre-exposure
+), fda.gov, 2021-12-08
+
 ### [The F.D.A. authorizes an AstraZeneca drug to protect people with immune problems](https://www.nytimes.com/2021/12/08/business/fda-authorizes-astrazeneca-drug-immunocompromised.html), nytimes.com, 2021-12-08, Rebecca Robbins
 - Covers Evusheld announcement from FDA.
 
