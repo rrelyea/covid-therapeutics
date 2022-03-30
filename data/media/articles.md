@@ -37,3 +37,5 @@
 > But they have not heard anything yet about scheduling a second dose, which Ms. Relyea needs based on the new recommendations.
 
 ### [Uncertainty for Biden’s Covid Plan After Aid Is Dropped From Spending Bill](https://www.nytimes.com/2022/03/09/us/politics/biden-pandemic-response-funding.html), nytimes.com, 2022-03-09, Sheryl Gay Stolberg and Madeleine Ngo
+
+### [Vulnerable Americans are desperate to find this Covid-19 drug. Thousands of boxes are sitting around unused](https://www.cnn.com/2022/03/24/health/evusheld-unused), cnn.com, 2022-03-24, Elizabeth Cohen and Danielle Herman
