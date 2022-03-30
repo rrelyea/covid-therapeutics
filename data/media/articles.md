@@ -26,6 +26,8 @@
 ### [Vulnerable to the Virus, High-Risk Americans Feel Pain as the U.S. Moves On](https://www.nytimes.com/2022/02/17/us/high-risk-covid-immunocompromised.html), nytimes.com, 2022-02-17, Amanda Morris and Maggie Astor
 - "Transplant recipients, cancer patients and millions of other Americans with risk factors feel ignored and abandoned as their neighbors, and their government, seek a return to normal."
 
+### [FDA authorizes revisions to Evusheld dosing](https://www.fda.gov/drugs/drug-safety-and-availability/fda-authorizes-revisions-evusheld-dosing), fda.gov, 2022-02-24
+
 ### [High Demand for Drug to Prevent Covid in the Vulnerable, Yet Doses Go Unused](https://www.nytimes.com/2022/03/06/us/politics/evusheld-covid-treatment.html), nytimes.com, 2022-03-06, Amanda Morris and Sheryl Gay Stolberg
 - "The treatment could be lifesaving for many who cannot get protection from the vaccine, but confusion about the drug has made some doctors slow to prescribe it."
 > Evusheld’s arrival in December immediately set off a scramble. In Facebook groups and online messages, patients and their loved ones began swapping information about how to get it. Government data sets about Evusheld’s availability were so complex and confusing that a software developer in the Seattle area, Rob Relyea, developed his own [mapping tool](https://rrelyea.github.io/evusheld/) that tracks how much of the drug is available and which providers have it.
