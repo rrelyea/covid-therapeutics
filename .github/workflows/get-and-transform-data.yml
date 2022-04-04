@@ -1,17 +1,14 @@
 name: Get and transform latest covid therapeutics data
 
 on:
-  push:
   workflow_dispatch:
-  
+
 jobs:
   scheduled:
     runs-on: ubuntu-latest
     steps:
     - name: Check out this repo
       uses: actions/checkout@v2
-      with:
-        fetch-depth: "0"
 
     - name: Install Python Dependencies (PIP)
       run: |-
