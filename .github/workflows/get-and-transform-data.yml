@@ -1,7 +1,9 @@
 name: Get and transform latest covid therapeutics data
 
 on:
-
+  push:
+  workflow_dispatch:
+  
 jobs:
   scheduled:
     runs-on: ubuntu-latest
