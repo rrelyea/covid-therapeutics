@@ -86,7 +86,7 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
       zip = get5digitZip(columns[6])
       if zip != "00Zip" and zip != None and (columns[8] in drugs):
         zipSet.add(zip)
-      elif columns[8] != "Molnupiravir":
+      elif columns[8] != "Molnupiravir" and columns[8] != "Lagevrio (molnupiravir)":
         print("skipped" + str(columns))
     therapeuticsFile.close()
 
