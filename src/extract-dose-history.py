@@ -115,12 +115,19 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
                   f.write(',' + columns[i])
                 else:
                   f.write(',')
-            else:
+            elif (timeStamp < "2022-03-31T15-09-22"):
               f.write(",NLP") #allotted_update  - no longer published by healthdata.gov
               f.write(",NLP") #last delivery    - no longer published by healthdata.gov
               f.write(",NLP") #allotted doses   - no longer published by healthdata.gov
               f.write("," + columns[9])     #available doses
               f.write("," + columns[13])    #last report date
+            else:
+              f.write(",NLP") #allotted_update  - no longer published by healthdata.gov
+              f.write(",NLP") #last delivery    - no longer published by healthdata.gov
+              f.write(",NLP") #allotted doses   - no longer published by healthdata.gov
+              f.write("," + columns[9])     #available doses
+              f.write("," + columns[12])    #last report date
+
             f.write('\n')
   return newLastProcessedDate, stopProcessingDate
 
