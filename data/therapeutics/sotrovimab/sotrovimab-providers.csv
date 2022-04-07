@@ -1,1 +1,1 @@
-provider_name,address1,address2,city,county,state_code,zip,national_drug_code,order_label,courses_available,geocoded_address,npi,last_report_date,provider_status,provider_note
+"provider_name","address1","address2","city","county","state_code","zip","national_drug_code","order_label","courses_available","geocoded_address","npi","last_report_date","provider_status","provider_note"
