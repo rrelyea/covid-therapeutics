@@ -3,6 +3,7 @@ import sys
 
 def sortDataFile(fileName):
   dataFile = pd.read_csv(fileName)
+  print ("sorting: " + fileName)
   
   # ensure standard casing, so that sorting works better.
   dataFile['city'] = dataFile['city'].str.title()
