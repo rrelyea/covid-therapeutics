@@ -86,8 +86,8 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
       zip = get5digitZip(columns[6])
       if zip != "00Zip" and zip != None and (columns[8] in drugs):
         zipSet.add(zip)
-      elif columns[8] != "Molnupiravir":
-        print("skipped" + str(columns))
+      else:
+        print("skipped " + str(columns))
     therapeuticsFile.close()
 
     print('zip codes for ' + mabsFile + ': ' + str(len(zipSet)), flush=True)
@@ -105,8 +105,11 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
             provider = '"' + provider + '"'
           if zip == zipCode and columns[8] in drugs:
             index = drugs.index(columns[8])
+            drugShortName = columns[8].lower()
+            if (drugShortName == 'lagevrio (molnupiravir)'):
+              drugShortName = "lagevrio"
             if zipFile[index] == None:
-              zipFile[index] = open(therapeuticsPath + columns[8].lower() + '/dose-history-by-zip/' + str(zipCode)+'.csv', "a",encoding='utf8')
+              zipFile[index] = open(therapeuticsPath + drugShortName + '/dose-history-by-zip/' + str(zipCode)+'.csv', "a",encoding='utf8')
             f = zipFile[index]
             f.write(timeStamp + ',' + zip + ',' + provider)
             if (timeStamp < "2022-03-16"):
@@ -132,7 +135,8 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
   return newLastProcessedDate, stopProcessingDate
 
 localBasePath = ""
-lastProcessedDate, stopProcessingDate = updateZipCodeFilesForDrug(localBasePath, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab'])
+        
+lastProcessedDate, stopProcessingDate = updateZipCodeFilesForDrug(localBasePath, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab', 'Lagevrio (molnupiravir)'])
 with open(localBasePath + "data/therapeutics/process-dates.csv", "w") as lastProcessed_file:
   lastProcessed_file.write(lastProcessedDate + ',' + stopProcessingDate)
   print("data/therapeutics/process-dates.csv set to: " + lastProcessedDate + ',' + stopProcessingDate)
