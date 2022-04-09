@@ -4,7 +4,7 @@
 # Covid-Therapeutic Providers
 - [rrelyea.github.io/paxlovid](https://rrelyea.github.io/paxlovid) - healthdata.gov data powered
 - [rrelyea.github.io/bebtelovimab](https://rrelyea.github.io/bebtelovimab) - healthdata.gov data powered
-- [rrelyea.github.io/sotrovimab](https://rrelyea.github.io/sotrovimab)  - healthdata.gov data powered
+- [rrelyea.github.io/lagevrio](https://rrelyea.github.io/lagevrio)  - healthdata.gov data powered
 
 # Where does this data comes from?
 HealthData.gov collects all medical facilities with Evusheld orders/inventory and publishes it to https://healthdata.gov/Health/COVID-19-Public-Therapeutic-Locator/rxn6-qnx8
