@@ -52,10 +52,6 @@ jobs:
     - name: download county adjacency info from census.gov
       run: |-
         curl https://www2.census.gov/geo/docs/reference/county_adjacency.txt > data/counties/county_adjacency.txt
-    - name: Expand county_adjacency.txt into individual county files and also create a county list per state in data/county-data/
-      run: |-
-        python src/transform-county-data.py onServer
-      shell: sh
     - name: Commit and push if it changed
       run: |-
         git config user.name "Automated"
