@@ -41,3 +41,6 @@
 ### [Uncertainty for Biden’s Covid Plan After Aid Is Dropped From Spending Bill](https://www.nytimes.com/2022/03/09/us/politics/biden-pandemic-response-funding.html), nytimes.com, 2022-03-09, Sheryl Gay Stolberg and Madeleine Ngo
 
 ### [Vulnerable Americans are desperate to find this Covid-19 drug. Thousands of boxes are sitting around unused](https://www.cnn.com/2022/03/24/health/evusheld-unused), cnn.com, 2022-03-24, Elizabeth Cohen and Danielle Herman
+
+### [Opinion: There's a drug to protect the most vulnerable from Covid-19. Why is it so hard to get?](https://www.cnn.com/2022/04/13/opinions/evusheld-immunocompromised-covid-19-equity-relyea/index.html), cnn.com, 2022-04-13, Rob Relyea
+>  "But almost four months in, our health system has failed to execute its campaign to protect the vulnerable. The supply of Evusheld is short, patient outreach is poor and goals to protect the immunocompromised are not being set, measured or reached."
