@@ -1,7 +1,7 @@
 healthDept_site,state_site,state,state_code,healthDept_twitter,healthDept_email,healthDept_phone,healthDept_search,covid_site,mabInfoLink,mabInfoUrl,pop_estimate
 alabamapublichealth.gov,alabama.gov,Alabama,AL,ALPublicHealth,,,www.alabamapublichealth.gov/search/index.html?query=KEYWORD,,Prevention and Treatment,www.alabamapublichealth.gov/covid19/prevention.html,5039877
 dhss.alaska.gov,alaska.gov,Alaska,AK,Alaska_DHSS,,,dhss.alaska.gov/pages/search.aspx?q=KEYWORD,,Outpatient Treatment,dhss.alaska.gov/dph/epi/id/pages/covid-19/outpatienttreatment.aspx,732673
-americansamoa.gov/departments,,American Samoa,AS,,,,,,,,
+americansamoa.gov/departments,,American Samoa,AS,,,,,,,,46366 
 azdhs.gov,az.gov,Arizona,AZ,azdhs,,,azdhs.gov/search/index.php?q=KEYWORD,,,,7276316
 healthy.arkansas.gov,arkansas.gov,Arkansas,AR,adhpio,,,,,Therapeutic Locations,www.healthy.arkansas.gov/programs-services/topics/covid-19-guidance-on-therapeutics,3025891
 cdph.ca.gov,ca.gov,California,CA,CAPublicHealth,,,www.cdph.ca.gov/Pages/results.aspx?k=#k=KEYWORD,www.cdph.ca.gov/Programs/CID/DCDC/Pages/Immunization/ncov2019.aspx,,,39237836
@@ -11,7 +11,7 @@ dhss.delaware.gov,delaware.gov,Delaware,DE,Delaware_DHSS,,,dhss.delaware.gov/dhs
 doh.dc.gov,dc.gov,District of Columbia,DC,_DCHealth,doh@dc.gov,202-442-5955,,coronavirus.dc.gov/,,,670050
 floridahealth.gov,myflorida.com,Florida,FL,HealthyFla,,850-245-4444,www.floridahealth.gov/search/search.cgi?zoom_query=KEYWORD&zoom_cat%5B%5D=0,,Treatment Locator,floridahealthcovid19.gov/treatments/treatmentlocator/?utm_source=floridahealth.gov&utm_medium=referral&utm_campaign=covid-19&utm_term=monoclonal+antibody+therapy+treatments+available+florida+2021&utm_content=trending_topics,21781128
 dph.georgia.gov,georgia.gov,Georgia,GA,GaDPH,,404-657-2700,dph.georgia.gov/search?search=KEYWORD&sm_site_name=dph,,Available Treatments,dph.georgia.gov/dph-covid-19-guidance,10799566
-dphss.guam.gov,guam.gov,Guam,GU,GuamDPHSS,,,,dphss.guam.gov/covid-19,,,
+dphss.guam.gov,guam.gov,Guam,GU,GuamDPHSS,,,,dphss.guam.gov/covid-19,,,168801
 health.hawaii.gov,hawaii.gov,Hawaii,HI,HawaiiDOH,,,,hawaiicovid19.com,,,1441553
 healthandwelfare.idaho.gov,idaho.gov,Idaho,ID,IDHW,,,healthandwelfare.idaho.gov/search?k=KEYWORD,,,,1900923
 dph.illinois.gov,illinois.gov,Illinois,IL,IDPH,,,dph.illinois.gov/search.html?q=KEYWORD&contentType=everything,dph.illinois.gov/covid19.html,Therapy Locator,dph.illinois.gov/covid19/covid-19-outpatient-therapy-locator.html,12671469
@@ -47,7 +47,7 @@ scdhec.gov,sc.gov,South Carolina,SC,scdhec,,,scdhec.gov/search?keywords=KEYWORD,
 doh.sd.gov,sd.gov,South Dakota,SD,SDDOH,,,cse.google.com/cse?cx=012382400048732927914%3Av2d9d_dbrdw&q=KEYWORD&sa=&siteurl=doh.sd.gov,doh.sd.gov/COVID/,Treatments & Therapeutics,doh.sd.gov/COVID/YourHealth.aspx,895376
 tn.gov/health.html,tn.gov,Tennessee,TN,TNDeptofHealth,,,www.tn.gov/health/search-results.html?q=KEYWORD,covid19.tn.gov/,,,6975218
 dshs.state.tx.us,texas.gov,Texas,TX,TexasDSHS,,,dshs.state.tx.us/Search/?q=KEYWORD,dshs.state.tx.us/coronavirus/,Therapeutics Locator,tdem.maps.arcgis.com/apps/webappviewer/index.html?id=993e2c2079f8487cafcec74e00e84991&fbclid=IwAR3thAzVNA74YljG1Gfwh3Ayvi_8VDP-m2HtV21feQSNt5MHXWbogsi5k_k,29527941
-doh.vi.gov,vi.gov,U.S. Virgin Islands,VI,USVIDOH,,,doh.vi.gov/search/node/KEYWORD,www.covid19usvi.com/,,,
+doh.vi.gov,vi.gov,U.S. Virgin Islands,VI,USVIDOH,,,doh.vi.gov/search/node/KEYWORD,www.covid19usvi.com/,,,87146
 health.utah.gov,utah.gov,Utah,UT,UtahDepOfHealth,,,health.utah.gov/?s=KEYWORD,coronavirus.utah.gov/,Monoclonal Antibodies,coronavirus.utah.gov/noveltherapeutics/,3337975
 healthvermont.gov,vermont.gov,Vermont,VT,HealthVermont,,,www.healthvermont.gov/search/site/KEYWORD,www.healthvermont.gov/covid-19,Treatments,www.healthvermont.gov/covid-19/symptoms-sickness/treatment-covid-19,645570
 vdh.virginia.gov,virginia.gov,Virginia,VA,VDHgov,,,www.vdh.virginia.gov/?s=KEYWORD,www.vdh.virginia.gov/coronavirus/,Therapeutics,www.vdh.virginia.gov/coronavirus/get-the-latest-guidance/health-professionals/therapeutics/,8642274
