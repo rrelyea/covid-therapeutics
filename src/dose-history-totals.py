@@ -142,9 +142,9 @@ def createProviderAndStateDoseHistoryFiles(localBasePath, drugsJson):
             providersPerState = providersPerState + 1
           lastState = state  
         if not (lastState == None or lastState == '' or lastState == 'state_code'):
-          outputFile.write(lastState+","+  str(dosesPerState)+"\""+  weekOrder(stateDosesByWeek) +"\"\n") 
+          outputFile.write(lastState+","+  str(dosesPerState)+"\'"+  weekOrder(stateDosesByWeek) +"\'\n") 
         dosesTotal = dosesTotal + dosesPerState
-        outputFile.write("USA"+","+  str(dosesTotal)+",\""+  weekOrder(nationalDosesByWeek) + "\"\n")
+        outputFile.write("USA"+","+  str(dosesTotal)+",\'"+  weekOrder(nationalDosesByWeek) + "\'\n")
 
 localBasePath = ""
 createProviderAndStateDoseHistoryFiles(localBasePath, '{"Evusheld":24, "Paxlovid":20, "Sotrovimab":5, "Bebtelovimab":5, "Lagevrio (molnupiravir)":24}')
