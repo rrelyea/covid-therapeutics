@@ -89,7 +89,7 @@ def accumulateDosesByWeek(providerDosesByWeek, totalsDosesByWeek):
 def weekOrder(dictionary):
    if 'total' in dictionary.keys():
     dictionary.pop('total')
-   value = "{"
+   value = ""
    isFirst = True
    for key in sorted(dictionary.keys()):
      comma = ","
@@ -97,7 +97,6 @@ def weekOrder(dictionary):
        isFirst = False
        comma = ""
      value = value + (comma + str(key) + ":" + str(dictionary[key]))
-   value = value + "}"
    return value
 
 def createProviderAndStateDoseHistoryFiles(localBasePath, drugsJson):
