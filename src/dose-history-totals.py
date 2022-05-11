@@ -72,8 +72,9 @@ def calculateDosesPerWeek(zip, providerName, drugName, dosesInBox, localBasePath
         lastAvailable = PRavailable
         lastWeekNumber = weekNumber
     #print(lastWeekNumber, dosesAdministeredWeek, dosesAdministeredTotal)
-    dosesGiven[lastWeekNumber] = dosesAdministeredWeek
-    dosesGiven["total"] = dosesAdministeredTotal
+    if lastWeekNumber != 0:
+      dosesGiven[lastWeekNumber] = dosesAdministeredWeek
+    dosesGiven['total'] = dosesAdministeredTotal
     #print(dosesGiven)
     return dosesGiven
 
@@ -84,6 +85,20 @@ def accumulateDosesByWeek(providerDosesByWeek, totalsDosesByWeek):
       totalDosesInWeek = totalsDosesByWeek[dosesInWeek]
     totalsDosesByWeek[dosesInWeek] = providerDosesByWeek[dosesInWeek] + totalDosesInWeek
   return totalsDosesByWeek
+
+def weekOrder(dictionary):
+   if 'total' in dictionary.keys():
+    dictionary.pop('total')
+   value = "{"
+   isFirst = True
+   for key in sorted(dictionary.keys()):
+     comma = ","
+     if isFirst:
+       isFirst = False
+       comma = ""
+     value = value + (comma + str(key) + ":" + str(dictionary[key]))
+   value = value + "}"
+   return value
 
 def createProviderAndStateDoseHistoryFiles(localBasePath, drugsJson):
   drugs = json.loads(drugsJson)
@@ -108,7 +123,7 @@ def createProviderAndStateDoseHistoryFiles(localBasePath, drugsJson):
           state = provider[5]
           if state != lastState:
             if not (lastState == None or lastState == '' or lastState == 'state_code'):
-              outputFile.write(lastState +","+  str(dosesPerState)+",\""+  str(stateDosesByWeek) +"\"\n")
+              outputFile.write(lastState +","+  str(dosesPerState)+",'"+  weekOrder(stateDosesByWeek) +"'\n")
             dosesTotal = dosesTotal + dosesPerState
             providersTotal = providersTotal + providersPerState
             dosesPerState = 0
@@ -121,15 +136,15 @@ def createProviderAndStateDoseHistoryFiles(localBasePath, drugsJson):
             providerDosesByWeek = calculateDosesPerWeek(zip, providerName, drugName, dosesInBox, localBasePath)
             stateDosesByWeek = accumulateDosesByWeek(providerDosesByWeek, stateDosesByWeek)
             firstKey = list(providerDosesByWeek.keys())[0]
-            if firstKey != 0 and (firstWeekPerDrug == None or firstKey < firstWeekPerDrug):
+            if firstKey != 0 and firstKey != 'total' and (firstWeekPerDrug == None or firstKey < firstWeekPerDrug):
               firstWeekPerDrug = firstKey
-            dosesPerState = dosesPerState + providerDosesByWeek["total"]
+            dosesPerState = dosesPerState + providerDosesByWeek['total']
             providersPerState = providersPerState + 1
           lastState = state  
         if not (lastState == None or lastState == '' or lastState == 'state_code'):
-          outputFile.write(lastState+","+  str(dosesPerState)+"\""+  str(stateDosesByWeek) +"\"\n") 
+          outputFile.write(lastState+","+  str(dosesPerState)+"\""+  weekOrder(stateDosesByWeek) +"\"\n") 
         dosesTotal = dosesTotal + dosesPerState
-        outputFile.write("USA"+","+  str(dosesTotal)+",\""+  str(nationalDosesByWeek) + "\"\n")
+        outputFile.write("USA"+","+  str(dosesTotal)+",\""+  weekOrder(nationalDosesByWeek) + "\"\n")
 
 localBasePath = ""
 createProviderAndStateDoseHistoryFiles(localBasePath, '{"Evusheld":24, "Paxlovid":20, "Sotrovimab":5, "Bebtelovimab":5, "Lagevrio (molnupiravir)":24}')
