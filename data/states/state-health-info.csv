@@ -1,5 +1,5 @@
 healthDept_site,state_site,state,state_code,healthDept_twitter,healthDept_email,healthDept_phone,healthDept_search,covid_site,mabInfoLink,mabInfoUrl,pop_estimate
-hhs.gov,usa.gov,United States,USA,HHSGov,,,https://search.hhs.gov/searchblox/hhs/index.html?query=KEYWORD,,COVID-19 Resources,covid.gov,331449281
+hhs.gov,usa.gov,United States,USA,HHSGov,,,search.hhs.gov/searchblox/hhs/index.html?query=KEYWORD,,COVID-19 Resources,covid.gov,331449281
 alabamapublichealth.gov,alabama.gov,Alabama,AL,ALPublicHealth,,,www.alabamapublichealth.gov/search/index.html?query=KEYWORD,,Prevention and Treatment,www.alabamapublichealth.gov/covid19/prevention.html,5039877
 dhss.alaska.gov,alaska.gov,Alaska,AK,Alaska_DHSS,,,dhss.alaska.gov/pages/search.aspx?q=KEYWORD,,Outpatient Treatment,dhss.alaska.gov/dph/epi/id/pages/covid-19/outpatienttreatment.aspx,732673
 americansamoa.gov/departments,,American Samoa,AS,,,,,,,,46366 
