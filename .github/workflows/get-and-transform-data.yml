@@ -37,6 +37,7 @@ jobs:
     - name: Update zip code inventory history for all mAbs
       run: |-
         python src/extract-dose-history.py
+        python src/dose-history-totals.py
       shell: sh
     - name: Commit and push if it changed
       run: |-
