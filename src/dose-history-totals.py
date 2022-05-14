@@ -103,7 +103,7 @@ def createProviderAndStateDoseHistoryFiles(localBasePath, drugsJson):
   drugs = json.loads(drugsJson)
   for drug in drugs.keys():
     drugName = drug.lower()
-    if (drugName == 'Lagevrio (molnupiravir)'):
+    if (drugName == 'lagevrio (molnupiravir)'):
       drugName = "lagevrio"
     lastState = None
     dosesPerState = 0
