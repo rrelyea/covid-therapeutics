@@ -105,8 +105,8 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
             provider = '"' + provider + '"'
           if zip == zipCode and columns[8] in drugs:
             index = drugs.index(columns[8])
-            drugShortName = columns[8].lower()
-            if (drugShortName == 'lagevrio (molnupiravir)'):
+            drugShortName = columns[8].replace(' ','-').lower()
+            if drugShortName.endswith('-(molnupiravir)'):
               drugShortName = "lagevrio"
             if zipFile[index] == None:
               zipFile[index] = open(therapeuticsPath + drugShortName + '/dose-history-by-zip/' + str(zipCode)+'.csv', "a",encoding='utf8')

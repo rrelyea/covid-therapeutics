@@ -20,6 +20,7 @@ jobs:
       run: |-
         curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Evusheld" > data/therapeutics/evusheld/evusheld-providers.csv
         curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Paxlovid" > data/therapeutics/paxlovid/paxlovid-providers.csv
+        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Renal+Paxlovid" > data/therapeutics/renal-paxlovid/renal-paxlovid-providers.csv
         curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Bebtelovimab" > data/therapeutics/bebtelovimab/bebtelovimab-providers.csv
         curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Lagevrio%20(molnupiravir)" > data/therapeutics/lagevrio/lagevrio-providers.csv
         curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Sotrovimab" > data/therapeutics/sotrovimab/sotrovimab-providers.csv
@@ -30,14 +31,10 @@ jobs:
       run: |-
         python src/transform-mAbs-data.py data/therapeutics/evusheld/evusheld-providers.csv
         python src/transform-mAbs-data.py data/therapeutics/paxlovid/paxlovid-providers.csv
+        python src/transform-mAbs-data.py data/therapeutics/renal-paxlovid/renal-paxlovid-providers.csv
         python src/transform-mAbs-data.py data/therapeutics/bebtelovimab/bebtelovimab-providers.csv
         python src/transform-mAbs-data.py data/therapeutics/lagevrio/lagevrio-providers.csv
         python src/transform-mAbs-data.py data/therapeutics/testToTreat/testToTreat-providers.csv
-      shell: sh
-    - name: Update zip code inventory history for all mAbs
-      run: |-
-        python src/extract-dose-history.py
-        python src/dose-history-totals.py
       shell: sh
     - name: Commit and push if it changed
       run: |-
@@ -46,6 +43,29 @@ jobs:
         git add -A
         timestamp=$(date -u)
         git commit -m "Latest therapeutics data: ${timestamp}" || exit 0
+        git push
+    - name: Update zip code inventory history for all mAbs
+      run: |-
+        python src/extract-dose-history.py
+    - name: Commit and push if it changed
+      run: |-
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Latest inventory by zip code: ${timestamp}" || exit 0
+        git push
+    - name: Update dose history totals for all mAbs
+      run: |-        
+        python src/dose-history-totals.py
+      shell: sh
+    - name: Commit and push if it changed
+      run: |-
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Latest dose history totals: ${timestamp}" || exit 0
         git push
 
 

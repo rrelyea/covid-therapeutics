@@ -28,7 +28,12 @@ def get5digitZip(rawZip):
 
 
 def calculateDosesPerWeek(zip, providerName, drugName, dosesInBox, localBasePath):
-  with open(localBasePath + "data/therapeutics/" + drugName + "/dose-history-by-zip/" + zip + ".csv", "r") as doseHistoryByZipFile:
+  doseHistoryByZipPath = localBasePath + "data/therapeutics/" + drugName + "/dose-history-by-zip/" + zip + ".csv"
+  if not exists(doseHistoryByZipFile):
+    dosesGiven = {'total':0} # TODO: why did zip code not exist on 5/20/2022 Action runs?
+    return dosesGiven
+
+  with open(doseHistoryByZipPath, "r") as doseHistoryByZipFile:
     dosesGiven = {}
 
     lastAvailable = 0
@@ -146,4 +151,4 @@ def createProviderAndStateDoseHistoryFiles(localBasePath, drugsJson):
         outputFile.write("USA"+","+  str(dosesTotal)+",\""+  weekOrder(nationalDosesByWeek) + "\"\n")
 
 localBasePath = ""
-createProviderAndStateDoseHistoryFiles(localBasePath, '{"Evusheld":24, "Paxlovid":20, "Sotrovimab":5, "Bebtelovimab":5, "Lagevrio (molnupiravir)":24}')
+createProviderAndStateDoseHistoryFiles(localBasePath, '{"Evusheld":24, "Paxlovid":20, "Sotrovimab":5, "Bebtelovimab":5, "Lagevrio (molnupiravir)":24, "Renal Paxlovid":10}')
