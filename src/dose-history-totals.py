@@ -107,8 +107,8 @@ def weekOrder(dictionary):
 def createProviderAndStateDoseHistoryFiles(localBasePath, drugsJson):
   drugs = json.loads(drugsJson)
   for drug in drugs.keys():
-    drugName = drug.lower()
-    if (drugName == 'lagevrio (molnupiravir)'):
+    drugName = drug.lower().replace(' ','-')
+    if drugName.endswith('-(molnupiravir)'):
       drugName = "lagevrio"
     lastState = None
     dosesPerState = 0
