@@ -26,7 +26,7 @@ jobs:
         curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/rxn6-qnx8.csv?\$limit=50000&order_label=Sotrovimab" > data/therapeutics/sotrovimab/sotrovimab-providers.csv
         curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/6m8a-tsjg.csv?\$limit=60000" > data/therapeutics/testToTreat/testToTreat-providers.csv
         curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/j7fh-jg79.json" > data/therapeutics/publish-events.json
-        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/savg-57kf.json" > data/TestToTreat/publish-events.json
+        curl --header "X-App-Token: ${{ secrets.HEALTHDATA_APPTOKEN }}" "https://healthdata.gov/resource/savg-57kf.json" > data/therapeutics/testToTreat/publish-events.json
     
     - name: Sort therapeutics data by state, county, city, provider
       run: |-
