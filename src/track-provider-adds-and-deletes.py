@@ -19,7 +19,7 @@ def get5digitZip(rawZip):
   else:
     return ""
    
-def trackProviderAddsAndDeletes(localBasePath, drugs, stateIndex, orderLabelIndex):
+def trackProviderAddsAndDeletes(localBasePath, dataRelativePath, drugs, stateIndex, orderLabelIndex):
   states = list()
   with open(localBasePath + "data/states/state-health-info.csv", "r") as states_file:
     reader = csv.reader(states_file)
@@ -27,7 +27,7 @@ def trackProviderAddsAndDeletes(localBasePath, drugs, stateIndex, orderLabelInde
       state_code = columns[3]
       states.append(state_code)
 
-  with open(localBasePath + "data/therapeutics/publish-events.json", "r") as read_file:
+  with open(localBasePath + "data/"+dataRelativePath+"/publish-events.json", "r") as read_file:
       publishings = json.load(read_file)
       urls = []
 
@@ -80,5 +80,5 @@ def trackProviderAddsAndDeletes(localBasePath, drugs, stateIndex, orderLabelInde
   return
 
 localBasePath = ""
-#trackProviderAddsAndDeletes(localBasePath, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab'], 5, 8)
-trackProviderAddsAndDeletes(localBasePath, ['TestToTreat'], 4, -1)
+#trackProviderAddsAndDeletes(localBasePath, "therapeutics", ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab'], 5, 8)
+trackProviderAddsAndDeletes(localBasePath, "TestToTreat", "TestToTreat" , 4, -1)
