@@ -29,7 +29,7 @@ def get5digitZip(rawZip):
 
 def calculateDosesPerWeek(zip, providerName, drugName, dosesInBox, localBasePath):
   doseHistoryByZipPath = localBasePath + "data/therapeutics/" + drugName + "/dose-history-by-zip/" + zip + ".csv"
-  if not exists(doseHistoryByZipFile):
+  if not exists(doseHistoryByZipPath):
     dosesGiven = {'total':0} # TODO: why did zip code not exist on 5/20/2022 Action runs?
     return dosesGiven
 
