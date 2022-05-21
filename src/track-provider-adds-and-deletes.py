@@ -27,7 +27,7 @@ def trackProviderAddsAndDeletes(localBasePath, dataRelativePath, drugs, stateInd
       state_code = columns[3]
       states.append(state_code)
 
-  with open(localBasePath + "data/"+dataRelativePath+"/publish-events.json", "r") as read_file:
+  with open(localBasePath + "data/"+dataRelativePath+"publish-events.json", "r") as read_file:
       publishings = json.load(read_file)
       urls = []
 
@@ -36,6 +36,7 @@ def trackProviderAddsAndDeletes(localBasePath, dataRelativePath, drugs, stateInd
         urls.append(publishing["archive_link"]["url"])
 
       for drug in drugs:
+        print(drug + " started.")
         drugPath = localBasePath + 'data/therapeutics/' + drug.lower() + '/'
         doseHistoryPath = drugPath + drug.lower() + '-providers-added-removed.csv'
         with open(doseHistoryPath, "w") as doseHistory_file:
@@ -45,7 +46,7 @@ def trackProviderAddsAndDeletes(localBasePath, dataRelativePath, drugs, stateInd
             for url in sorted(urls):
               lastProviders = providers
               filename = os.path.basename(urlparse(url).path)
-              therapeuticsPath = localBasePath + 'data/therapeutics/'
+              therapeuticsPath = localBasePath + 'data/' + dataRelativePath
               publishEventsPath = therapeuticsPath + 'publish-events/'
               mabsFile = publishEventsPath + filename
               therapeuticsFile = open(mabsFile, 'r', encoding='utf8')
@@ -81,4 +82,4 @@ def trackProviderAddsAndDeletes(localBasePath, dataRelativePath, drugs, stateInd
 
 localBasePath = ""
 #trackProviderAddsAndDeletes(localBasePath, "therapeutics", ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab'], 5, 8)
-trackProviderAddsAndDeletes(localBasePath, "therapeutics/testToTreat", ["testToTreat"] , 4, -1)
+trackProviderAddsAndDeletes(localBasePath, "therapeutics/testToTreat/", ["testToTreat"] , 4, -1)
