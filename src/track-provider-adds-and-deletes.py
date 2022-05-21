@@ -38,7 +38,7 @@ def trackProviderAddsAndDeletes(localBasePath, dataRelativePath, drugs, stateInd
       for drug in drugs:
         print(drug + " started.")
         drugPath = localBasePath + 'data/therapeutics/' + drug.lower() + '/'
-        doseHistoryPath = drugPath + drug.lower() + '-providers-added-removed.csv'
+        doseHistoryPath = drugPath + drug.lower() + '-providers-added-removed.txt'
         with open(doseHistoryPath, "w") as doseHistory_file:
           doseHistory_file.write("State Date       Time   Providers Details\n")
           for state_code in states:
