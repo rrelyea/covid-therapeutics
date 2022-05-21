@@ -19,17 +19,22 @@ def get5digitZip(rawZip):
     return rawZip[0:5]
   else:
     return None
-   
-def updateZipCodeFilesForDrug(localBasePath, drugs):
-  with open(localBasePath + "data/therapeutics/process-dates.csv", "r") as lastProcessed_file:
+
+def updateLastProcessedDate(therapeuticsSubfolder, lastProcessedDate, stopProcessingDate):
+  with open("data/therapeutics/"+therapeuticsSubfolder+"process-dates.csv", "w") as lastProcessed_file:
+    lastProcessed_file.write(lastProcessedDate + ',' + stopProcessingDate)
+    print("  data/therapeutics/"+therapeuticsSubfolder+"process-dates.csv set to: " + lastProcessedDate + ',' + stopProcessingDate)
+
+def downloadAllPublishEventFiles(therapeuticsSubfolder):
+  with open("data/therapeutics/"+therapeuticsSubfolder+"process-dates.csv", "r") as lastProcessed_file:
     processDates = lastProcessed_file.readline().split(',')
     lastProcessedDate = processDates[0]
     stopProcessingDate = processDates[1]
-    print("last processed: " + lastProcessedDate)
-    print("stop procesing: " + lastProcessedDate)
+    print("  last processed: " + lastProcessedDate)
+    print("  stop procesing: " + stopProcessingDate)
 
   newLastProcessedDate = None
-  with open(localBasePath + "data/therapeutics/publish-events.json", "r") as read_file:
+  with open("data/therapeutics/"+therapeuticsSubfolder+"publish-events.json", "r") as read_file:
       publishings = json.load(read_file)
       urls = []
 
@@ -37,12 +42,12 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
         updateDate = publishing["update_date"]
         if updateDate > lastProcessedDate and updateDate < stopProcessingDate :
           urls.append(publishing["archive_link"]["url"])
-          newLastProcessedDate = updateDate
+
+  publishEventPath = "data/therapeutics/"+therapeuticsSubfolder+"publish-events/"
 
   # download all new files
   for url in sorted(urls):
     filename = os.path.basename(urlparse(url).path)
-    publishEventPath = localBasePath + 'data/therapeutics/publish-events/'
     while not os.path.exists(publishEventPath):
       os.mkdir(publishEventPath)
     mabsFile = publishEventPath + filename
@@ -52,9 +57,13 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
       therapeuticsFile = open(mabsFile, 'wb')
       therapeuticsFile.write(r.content)
       therapeuticsFile.close()
+  return sorted(urls), lastProcessedDate, stopProcessingDate
+
+def updateZipCodeFilesForDrug(therapeuticsSubfolder, drugs, sortedUrls, lastProcessedDate, stopProcessingDate):
+  newLastProcessedDate = None
 
   for drug in drugs:
-      drugPath = localBasePath + 'data/therapeutics/' + drug.lower() + '/'
+      drugPath = 'data/therapeutics/' + drug.lower() + '/'
       doseHistoryPath = drugPath + 'dose-history-by-zip/'
       if lastProcessedDate < "2020-03-02T00:00:00.000" and os.path.exists(drugPath):
         for root, directories, files in os.walk(doseHistoryPath):
@@ -65,16 +74,15 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
         os.mkdir(drugPath)
       while not os.path.exists(doseHistoryPath):
         os.mkdir(doseHistoryPath)
-     
 
   # calculate all zip codes by processing from publish event after lastProcessedDate to stopProcessingDate
-  if len(urls) == 0:
-    print("complete. no new data to process.")
-    sys.exit()
+  if len(sortedUrls) == 0:
+    print("  zip code work complete. no new data to process.")
+    return newLastProcessedDate, stopProcessingDate
 
-  for url in sorted(urls):
+  for url in sortedUrls:
     filename = os.path.basename(urlparse(url).path)
-    therapeuticsPath = localBasePath + 'data/therapeutics/'
+    therapeuticsPath = 'data/therapeutics/'
     publishEventsPath = therapeuticsPath + 'publish-events/'
     while not os.path.exists(publishEventsPath):
       os.mkdir(publishEventsPath)
@@ -134,9 +142,23 @@ def updateZipCodeFilesForDrug(localBasePath, drugs):
             f.write('\n')
   return newLastProcessedDate, stopProcessingDate
 
-localBasePath = ""
-        
-lastProcessedDate, stopProcessingDate = updateZipCodeFilesForDrug(localBasePath, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab', 'Lagevrio (molnupiravir)'])
-with open(localBasePath + "data/therapeutics/process-dates.csv", "w") as lastProcessed_file:
-  lastProcessed_file.write(lastProcessedDate + ',' + stopProcessingDate)
-  print("data/therapeutics/process-dates.csv set to: " + lastProcessedDate + ',' + stopProcessingDate)
+therapeuticsSubfolders = ["", "testToTreat/"]
+for therapeuticsSubfolder in therapeuticsSubfolders:
+  updatedLastProcessedDate = None
+  print()
+  print("starting work for [data/therapeutics/" + therapeuticsSubfolder + "]:")
+  sortedUrls, lastProcessedDate, stopProcessingDate = downloadAllPublishEventFiles(therapeuticsSubfolder)
+  print("  new data for [data/therapeutics/"+therapeuticsSubfolder+"]: " + str(sortedUrls))
+  if therapeuticsSubfolder == "":
+    updatedLastProcessedDate, stopProcessingDate = updateZipCodeFilesForDrug(therapeuticsSubfolder, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab', 'Lagevrio (molnupiravir)'], sortedUrls, lastProcessedDate, stopProcessingDate)
+  else:
+    if len(sortedUrls) > 0:
+      lastUrlProcessed = sortedUrls[len(sortedUrls)-1]
+      dateTimeCharStartIndex = lastUrlProcessed.index('_') + 1
+      date = lastUrlProcessed[dateTimeCharStartIndex:dateTimeCharStartIndex+11]
+      time = (lastUrlProcessed[dateTimeCharStartIndex + 11:len(lastUrlProcessed)-4]+".000").replace('-',':')
+      print(date, time)
+      updatedLastProcessedDate = date + time
+  if updatedLastProcessedDate != None:
+    updateLastProcessedDate(therapeuticsSubfolder, updatedLastProcessedDate, stopProcessingDate)
+
