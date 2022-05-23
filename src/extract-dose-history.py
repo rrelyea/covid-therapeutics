@@ -118,7 +118,12 @@ def updateZipCodeFilesForDrug(therapeuticsSubfolder, drugs, sortedUrls, lastProc
             if drugShortName.endswith('-(molnupiravir)'):
               drugShortName = "lagevrio"
             if zipFile[index] == None:
-              zipFile[index] = open(therapeuticsPath + drugShortName + '/dose-history-by-zip/' + str(zipCode)+'.csv', "a",encoding='utf8')
+              zipFilePath = therapeuticsPath + drugShortName + '/dose-history-by-zip/' + str(zipCode)+'.csv'
+              if exists(zipFilePath):
+                fileMode = "a"
+              else:
+                fileMode = "w"
+              zipFile[index] = open(zipFilePath, fileMode, encoding='utf8')
             f = zipFile[index]
             f.write(timeStamp + ',' + zip + ',' + provider)
             if (timeStamp < "2022-03-16"):
