@@ -63,7 +63,10 @@ def updateZipCodeFilesForDrug(therapeuticsSubfolder, drugs, sortedUrls, lastProc
   newLastProcessedDate = None
 
   for drug in drugs:
-      drugPath = 'data/therapeutics/' + drug.lower() + '/'
+      drugShortName = drug.replace(' ','-').lower()
+      if drugShortName.endswith('-(molnupiravir)'):
+        drugShortName = "lagevrio"
+      drugPath = 'data/therapeutics/' + drugShortName + '/'
       doseHistoryPath = drugPath + 'dose-history-by-zip/'
       if lastProcessedDate < "2020-03-02T00:00:00.000" and os.path.exists(drugPath):
         for root, directories, files in os.walk(doseHistoryPath):
