@@ -104,6 +104,7 @@ def updateZipCodeFilesForDrug(therapeuticsSubfolder, drugs, sortedUrls, lastProc
       filename = os.path.basename(urlparse(url).path)
       therapeuticsFile = publishEventsPath + filename
       timeStamp = filename.replace('rxn6-qnx8_','').replace('.csv','')
+      newLastProcessedDate = timeStamp + ".000"
       with open(therapeuticsFile, 'r', encoding='utf8') as data:
         reader = csv.reader(data)
         for columns in reader:
@@ -150,7 +151,7 @@ for therapeuticsSubfolder in therapeuticsSubfolders:
   sortedUrls, lastProcessedDate, stopProcessingDate = downloadAllPublishEventFiles(therapeuticsSubfolder)
   print("  new data for [data/therapeutics/"+therapeuticsSubfolder+"]: " + str(sortedUrls))
   if therapeuticsSubfolder == "":
-    updatedLastProcessedDate, stopProcessingDate = updateZipCodeFilesForDrug(therapeuticsSubfolder, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab', 'Lagevrio (molnupiravir)'], sortedUrls, lastProcessedDate, stopProcessingDate)
+    updatedLastProcessedDate, stopProcessingDate = updateZipCodeFilesForDrug(therapeuticsSubfolder, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab', 'Lagevrio (molnupiravir)', 'Renal Paxlovid'], sortedUrls, lastProcessedDate, stopProcessingDate)
   else:
     if len(sortedUrls) > 0:
       lastUrlProcessed = sortedUrls[len(sortedUrls)-1]
@@ -161,4 +162,3 @@ for therapeuticsSubfolder in therapeuticsSubfolders:
       updatedLastProcessedDate = date + time
   if updatedLastProcessedDate != None:
     updateLastProcessedDate(therapeuticsSubfolder, updatedLastProcessedDate, stopProcessingDate)
-
