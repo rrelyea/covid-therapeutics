@@ -30,8 +30,7 @@ def downloadAllPublishEventFiles(therapeuticsSubfolder):
     processDates = lastProcessed_file.readline().split(',')
     lastProcessedDate = processDates[0]
     stopProcessingDate = processDates[1]
-    print("  last processed: " + lastProcessedDate)
-    print("  stop procesing: " + stopProcessingDate)
+    print("  initial processed/stop dates: " + str(processDates))
 
   newLastProcessedDate = None
   with open("data/therapeutics/"+therapeuticsSubfolder+"publish-events.json", "r") as read_file:
@@ -40,6 +39,8 @@ def downloadAllPublishEventFiles(therapeuticsSubfolder):
 
       for publishing in publishings:
         updateDate = publishing["update_date"]
+        if newLastProcessedDate == None or updateDate > newLastProcessedDate:
+          newLastProcessedDate = updateDate
         if updateDate > lastProcessedDate and updateDate < stopProcessingDate :
           urls.append(publishing["archive_link"]["url"])
 
@@ -47,7 +48,7 @@ def downloadAllPublishEventFiles(therapeuticsSubfolder):
 
   # download all new files
   for url in sorted(urls):
-    filename = os.path.basename(urlparse(url).path)
+    filename = getFilenameFromUrl(url)
     while not os.path.exists(publishEventPath):
       os.mkdir(publishEventPath)
     mabsFile = publishEventPath + filename
@@ -57,7 +58,7 @@ def downloadAllPublishEventFiles(therapeuticsSubfolder):
       therapeuticsFile = open(mabsFile, 'wb')
       therapeuticsFile.write(r.content)
       therapeuticsFile.close()
-  return sorted(urls), lastProcessedDate, stopProcessingDate
+  return sorted(urls), newLastProcessedDate, stopProcessingDate
 
 def updateZipCodeFilesForDrug(therapeuticsSubfolder, drugs, sortedUrls, lastProcessedDate, stopProcessingDate):
   newLastProcessedDate = None
@@ -84,7 +85,7 @@ def updateZipCodeFilesForDrug(therapeuticsSubfolder, drugs, sortedUrls, lastProc
     return newLastProcessedDate, stopProcessingDate
 
   for url in sortedUrls:
-    filename = os.path.basename(urlparse(url).path)
+    filename = getFilenameFromUrl(url)
     therapeuticsPath = 'data/therapeutics/'
     publishEventsPath = therapeuticsPath + 'publish-events/'
     while not os.path.exists(publishEventsPath):
@@ -103,10 +104,13 @@ def updateZipCodeFilesForDrug(therapeuticsSubfolder, drugs, sortedUrls, lastProc
 
     print('zip codes for ' + mabsFile + ': ' + str(len(zipSet)), flush=True)
     for zipCode in sorted(zipSet):
+      # for testing only do 1 zip code
+      # if zipCode != "98004":
+      #   continue
       zipFile = [None] * len(drugs)
-      filename = os.path.basename(urlparse(url).path)
+      filename = getFilenameFromUrl(url)
       therapeuticsFile = publishEventsPath + filename
-      timeStamp = filename.replace('rxn6-qnx8_','').replace('.csv','')
+      timeStamp = getTimeStampFromFilename(filename, 'rxn6-qnx8')
       newLastProcessedDate = timeStamp + ".000"
       with open(therapeuticsFile, 'r', encoding='utf8') as data:
         reader = csv.reader(data)
@@ -115,7 +119,7 @@ def updateZipCodeFilesForDrug(therapeuticsSubfolder, drugs, sortedUrls, lastProc
           provider = columns[0]
           if "," in provider:
             provider = '"' + provider + '"'
-          if zip == zipCode and columns[8] in drugs:
+          if zip == "98004" and zip == zipCode and columns[8] in drugs:
             index = drugs.index(columns[8])
             drugShortName = columns[8].replace(' ','-').lower()
             if drugShortName.endswith('-(molnupiravir)'):
@@ -149,24 +153,31 @@ def updateZipCodeFilesForDrug(therapeuticsSubfolder, drugs, sortedUrls, lastProc
               f.write("," + columns[12])    #last report date
 
             f.write('\n')
-  return newLastProcessedDate, stopProcessingDate
+  return lastProcessedDate, stopProcessingDate
+
+def getTimeStampFromFilename(filename, feedId):
+  timeStamp = filename.replace(feedId + '_','').replace('.csv','')
+  return timeStamp
+
+def getFilenameFromUrl(url):
+  filename = os.path.basename(urlparse(url).path)
+  return filename
 
 therapeuticsSubfolders = ["", "testToTreat/"]
 for therapeuticsSubfolder in therapeuticsSubfolders:
   updatedLastProcessedDate = None
   print()
   print("starting work for [data/therapeutics/" + therapeuticsSubfolder + "]:")
-  sortedUrls, lastProcessedDate, stopProcessingDate = downloadAllPublishEventFiles(therapeuticsSubfolder)
+  sortedUrls, latestDataPublishedDate, stopProcessingDate = downloadAllPublishEventFiles(therapeuticsSubfolder)
   print("  new data for [data/therapeutics/"+therapeuticsSubfolder+"]: " + str(sortedUrls))
   if therapeuticsSubfolder == "":
-    updatedLastProcessedDate, stopProcessingDate = updateZipCodeFilesForDrug(therapeuticsSubfolder, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab', 'Lagevrio (molnupiravir)', 'Renal Paxlovid'], sortedUrls, lastProcessedDate, stopProcessingDate)
+    updatedLastProcessedDate, stopProcessingDate = updateZipCodeFilesForDrug(therapeuticsSubfolder, ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab', 'Lagevrio (molnupiravir)', 'Renal Paxlovid'], sortedUrls, latestDataPublishedDate, stopProcessingDate)
   else:
     if len(sortedUrls) > 0:
       lastUrlProcessed = sortedUrls[len(sortedUrls)-1]
       dateTimeCharStartIndex = lastUrlProcessed.index('_') + 1
       date = lastUrlProcessed[dateTimeCharStartIndex:dateTimeCharStartIndex+11]
       time = (lastUrlProcessed[dateTimeCharStartIndex + 11:len(lastUrlProcessed)-4]+".000").replace('-',':')
-      print(date, time)
       updatedLastProcessedDate = date + time
   if updatedLastProcessedDate != None:
     updateLastProcessedDate(therapeuticsSubfolder, updatedLastProcessedDate, stopProcessingDate)
