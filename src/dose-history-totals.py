@@ -132,7 +132,7 @@ def getPercentICProtected(drugName, state, popByStateCode, dosesGiven):
   ICAdultsStr = getICAdultEstimate(drugName, state, popByStateCode)
   if ICAdultsStr != '' and dosesGiven != '':
     percentProtected = float(dosesGiven) / float(ICAdultsStr) * 100.0
-    return "{:.2f}".format(percentProtected)
+    return "{:.2f}".format(percentProtected)+"%"
   else:
     return ""
 
