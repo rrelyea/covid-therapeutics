@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>COVID.gov - Find COVID-19 guidance for your community</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="preload" href="/assets/fonts/noto-sans/notosans-5c64b5d98d95d48fd178c7f5aed18886f1a4fe3f.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans/notosans-7f6960d2a8145cbf9e8c54057096b7307f874134.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans/notosans-31916fd4f0dabed1f5ec92477cc02a89ca2abe8b.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="/assets/fonts/noto-sans/notosans-385f76f27688d673199c91555eda2d972fdccf7d.woff" as="font" type="font/woff" crossorigin>
+
+  <script>document.createElement('main');</script>
+  <script src="/assets/js/uswds-init.min.js?ver=1.13"></script>
+  <link rel="stylesheet" href="/assets/css/accessible-autocomplete.min.css">
+  <link rel="stylesheet" href="/assets/css/styles.css?ver=1.13">
+
+  <!-- Favicons -->
+  <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/favicon.ico" sizes="16x16">
+  <meta name="application-name" content="COVID.gov">
+
+  <!-- Description -->
+  <meta name="description" content="Resources to keep yourself and others safe from COVID-19">
+  <link rel="canonical" href="https://www.covid.gov/">
+
+  <!-- Facebook -->
+  <meta property="og:title" content="COVID.gov - Find COVID-19 guidance for your community">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:description" content="Resources to keep yourself and others safe from COVID-19">
+  <meta property="og:image" content="https://www.covid.gov/assets/img/share.jpg">
+  <meta property="og:author" content="HHS">
+  <meta property="article:author" content="HHS">
+  <meta property="og:site_name" content="COVID.gov">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.covid.gov/">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@hhsgov">
+  <meta name="twitter:creator" content="@hhsgov">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name":"COVID.gov",
+        "url": "https://www.covid.gov/",
+        "logo": "https://www.covid.gov/assets/img/covidtest/hhs-logo.png",
+        "parentOrganization": [
+          {
+            "@type": "Organization",
+            "name": "U.S. Department of Health & Human Services",
+            "url": "https://www.hhs.gov/"
+          }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "COVID.gov",
+        "url": "https://www.covid.gov/"
+      }
+    ]
+  </script>
+
+  <!-- We participate in the US government's analytics program. See the data at analytics.usa.gov. -->
+  <script async src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=HHS" id="_fed_an_ua_tag"></script>
+</head>
+<body>
+  <a class="usa-skipnav" href="#main-content">Skip to main content</a>
+
+  <section class="usa-banner site-banner" aria-label="Official government website">
+    <div class="usa-accordion">
+      <header class="usa-banner__header">
+        <div class="usa-banner__inner">
+          <div class="grid-col-auto">
+            <img class="usa-banner__header-flag" src="/assets/img/us_flag_small.png" width="16" height="11" alt="U.S. flag">
+          </div>
+          <div class="grid-col-fill tablet:grid-col-auto">
+            <p class="usa-banner__header-text">An official website of the United States government</p>
+            <p class="usa-banner__header-action" aria-hidden="true">HereΓÇÖs how you know</p>
+          </div>
+          <button class="usa-accordion__button usa-banner__button"
+            aria-expanded="false" aria-controls="gov-banner">
+            <span class="usa-banner__button-text">HereΓÇÖs how you know</span>
+          </button>
+        </div>
+      </header>
+      <div class="usa-banner__content usa-accordion__content" id="gov-banner">
+        <div class="grid-row grid-gap-lg">
+          <div class="usa-banner__guidance tablet:grid-col-6">
+            <img class="usa-banner__icon usa-media-block__img" src="/assets/img/icon-dot-gov.svg" role="img" alt="" aria-hidden="true">
+            <div class="usa-media-block__body">
+              <p>
+                <strong>Official websites use .gov</strong>
+                <br>
+                A <strong>.gov</strong> website belongs to an official government organization in the United States.
+              </p>
+            </div>
+          </div>
+          <div class="usa-banner__guidance tablet:grid-col-6">
+            <img class="usa-banner__icon usa-media-block__img" src="/assets/img/icon-https.svg" role="img" alt="" aria-hidden="true">
+            <div class="usa-media-block__body">
+              <p>
+                <strong>Secure .gov websites use HTTPS</strong>
+                <br>
+                A <strong>lock</strong> ( <span class="icon-lock"><svg xmlns="http://www.w3.org/2000/svg" width="52" height="64" viewBox="0 0 52 64" class="usa-banner__lock-image" role="img" aria-labelledby="banner-lock-title banner-lock-description" focusable="false"><title id="banner-lock-title">Lock</title><desc id="banner-lock-description">A locked padlock</desc><path fill="#000000" fill-rule="evenodd" d="M26 0c10.493 0 19 8.507 19 19v9h3a4 4 0 0 1 4 4v28a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V32a4 4 0 0 1 4-4h3v-9C7 8.507 15.507 0 26 0zm0 8c-5.979 0-10.843 4.77-10.996 10.712L15 19v9h22v-9c0-6.075-4.925-11-11-11z"/></svg></span> ) or <strong>https://</strong> means youΓÇÖve safely connected to the .gov website. Share sensitive information only on official, secure websites.
+
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <header class="covidtest-header">
+    <div class="covidtest-header__container covidtest-container">
+      <div class="covidtest-logo">
+        <em class="covidtest-logo__text">
+          <a href="/">COVID.gov</a>
+        </em>
+      </div>
+      <nav aria-label="Primary navigation" class="covidtest-nav">
+        <!-- Desktop Nav -->
+        <ul class="covidtest-nav__primary">
+          <li class="covidtest-nav__primary-item">
+            <span>English</span>
+          </li>
+          <li lang="es-US" class="covidtest-nav__primary-item">
+            <a href="/es/" class="spanish-link"><span class="sr-only">Presione Enter para cambiar el idioma del sitio a </span>Espa├▒ol</a>
+          </li>
+          <li lang="zh-CN" class="covidtest-nav__primary-item">
+            <a href="/zh/" class="chinese-link"><span class="sr-only">µîë Enter (σ¢₧Φ╜ªΘö«) ∩╝îµèèτ╜æτ½ÖΦ»¡Φ¿Çµö╣Σ╕║</span>τ«ÇΣ╜ôΣ╕¡µûç</a>
+          </li>
+        </ul>
+
+        <!-- Mobile Nav -->
+        <ul class="covidtest-nav__primary-mobile usa-accordion">
+          <li class="covidtest-nav__primary-mobile-item">
+            <button
+              class="usa-accordion__button"
+              aria-expanded="false"
+              aria-controls="covidtest-languages">
+              <span>English</span>
+            </button>
+            <ul id="covidtest-languages" class="covidtest-nav__primary-submenu usa-accordion__content">
+              <li lang="es-US" class="covidtest-nav__primary-submenu-item">
+                <a href="/es/" class="spanish-link"><span class="sr-only">Presione Enter para cambiar el idioma del sitio a </span>Espa├▒ol</a>
+              </li>
+              <li lang="zh-CN" class="covidtest-nav__primary-submenu-item">
+                <a href="/zh/" class="chinese-link"><span class="sr-only">µîë Enter (σ¢₧Φ╜ªΘö«) ∩╝îµèèτ╜æτ½ÖΦ»¡Φ¿Çµö╣Σ╕║</span>τ«ÇΣ╜ôΣ╕¡µûç</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="covidgov-main">
+    <div class="location-toolkit-wrap">
+      <div class="location-search">
+        <h1>Find COVID-&#8288;19 guidance for your community</h1>
+        <div class="location-search__wrap">
+          <form class="location-search__widget">
+            <div class="widget__search-bar">
+              <div class="display-value"><span class="county"></span><span class="state"></span></div>
+              <label for="location-search" class="sr-only">Search for your county to find COVID-&#8288;19 guidance for your community</label>
+		          <div id="location-search-field">
+                <div class="loading">Loading Search
+                  <div class="lds-ellipsis">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+              <svg class="widget__search-icon" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.8256 29.6167C18.186 29.6167 21.3093 28.4715 23.8 26.5761L30.6395 33.4077C31.0349 33.8026 31.5488 34 32.0233 34C32.4977 34 33.0512 33.8026 33.407 33.4077C34.1977 32.6179 34.1977 31.3937 33.407 30.604L26.607 23.7724C28.5047 21.2846 29.6512 18.1649 29.6512 14.8084C29.6512 6.63415 23.0093 0 14.8256 0C6.64186 0 0 6.63415 0 14.8084C0 22.9826 6.64186 29.6167 14.8256 29.6167ZM14.8256 3.9489C20.7953 3.9489 25.6977 8.80604 25.6977 14.8084C25.6977 20.8107 20.7953 25.6678 14.8256 25.6678C8.85581 25.6678 3.95349 20.7712 3.95349 14.8084C3.95349 8.84553 8.81628 3.9489 14.8256 3.9489Z" fill="#00426B"/>
+              </svg>
+              <button class="widget__remove-icon">
+                <span class="sr-only">Click to clear search</span>
+                <svg  width="48" height="32" viewBox="0 0 48 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M42.5253 7.67793e-06H13.4729C11.7629 -0.00286261 10.1494 0.799173 9.11148 2.16784L1.13645 12.6386H1.13686C0.399569 13.6021 0 14.7839 0 16C0 17.2161 0.3996 18.3979 1.13686 19.3614L9.11188 29.8322H9.11148C10.1494 31.2009 11.7629 32.0029 13.4729 32H42.5253C43.9775 32 45.3697 31.4194 46.3967 30.3857C47.4232 29.3524 48 27.9505 48 26.4891V5.51091C48 4.04953 47.4232 2.64766 46.3967 1.61434C45.3698 0.580627 43.9775 7.67793e-06 42.5253 7.67793e-06ZM33.4192 19.6745C33.7646 20.0193 33.9589 20.4888 33.9589 20.9788C33.9589 21.4684 33.7646 21.9379 33.4192 22.2832C33.0745 22.6268 32.6085 22.8187 32.1234 22.8158C31.6382 22.8187 31.1722 22.6268 30.8276 22.2832L27.1778 18.6092L23.528 22.2832C23.1854 22.6309 22.719 22.8265 22.2322 22.8265C21.7458 22.8265 21.2794 22.6309 20.9368 22.2832C20.591 21.9379 20.3967 21.4684 20.3967 20.9788C20.3967 20.4888 20.591 20.0193 20.9368 19.6745L24.5866 16.0005L20.9368 12.3266C20.4737 11.8608 20.2928 11.1814 20.4623 10.5449C20.6317 9.90851 21.1258 9.41116 21.7581 9.24059C22.3903 9.07001 23.0652 9.25207 23.528 9.71787L27.1778 13.3918L30.8276 9.71787C31.2908 9.25207 31.9653 9.07001 32.5975 9.24059C33.2302 9.41116 33.7239 9.90854 33.8933 10.5449C34.0628 11.1813 33.8819 11.8607 33.4192 12.3266L29.7694 16.0005L33.4192 19.6745Z" fill="#C5C5C5"/>
+                </svg>
+              </button>
+            </div>
+          </form>
+          <div class="location-search__results">
+            <div class="location-search__results__inner">
+              <h2 class="location-search__results__title"><span class="severity"></span><span class="data-severityUpper"></span> COVID-&#8288;19 Community Level</h2>
+              <p>CDC recommended steps you can take to protect yourself and others:</p>
+              <ul class="no-dots">
+                <li class="mask-item">
+                  <span class="icon"><img src="/assets/img/mask.svg" alt="Mask Icon" /></span><span class="text data-masks"></span>
+                </li>
+                <li>
+                  <span class="icon"><img src="/assets/img/syringe.svg" alt="Syringe Icon" /></span><span class="text"><a href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/stay-up-to-date.html" class="usa-link usa-link--external" rel="noopener">Stay up to date</a> with COVID-&#8288;19 vaccines.</span>
+                </li>
+                <li>
+                  <span class="icon"><img src="/assets/img/beaker.svg" alt="Beaker Icon" /></span><span class="text"><a href="https://www.cdc.gov/coronavirus/2019-ncov/testing/diagnostic-testing.html" class="usa-link usa-link--external" rel="noopener">Get tested</a> if you have symptoms.</span>
+                </li>
+              </ul>
+              <p>People with symptoms, a positive test, or exposure to someone with COVID-&#8288;19 should wear a mask. Additional precautions may be needed for people at <a href="https://www.cdc.gov/coronavirus/2019-ncov/need-extra-precautions/people-with-medical-conditions.html" class="usa-link usa-link--external" rel="noopener">high risk for severe illness</a>.</p>
+              <div class="results__bottom">
+                <h3>Why is the Community Level <span class="data-severityUpper"></span>?</h3>
+                <p>The Community Level is <span class="data-severityLower"></span> because the levels of COVID-&#8288;19 hospitalizations, cases, and patients in hospital beds are <span class="data-why"></span>. <a href="https://www.cdc.gov/coronavirus/2019-ncov/science/community-levels.html" class="usa-link usa-link--external" rel="noopener">Learn more about COVID-&#8288;19 Community Levels</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolkit">
+        <div class="toolkit__line"></div>
+        <div class="toolkit__wrap">
+          <div class="toolkit__intro">
+            <h2 class="line-title center">Your COVID-&#8288;19 Toolkit</h2>
+            <p>Resources to keep yourself and others safe from COVID-&#8288;19.</p>
+          </div>
+          <div class="toolkit__boxes">
+            <div class="toolkit__box">
+              <div class="toolkit__box__icon toolkit__desktop__icon">
+                <img src="/assets/img/mask.svg" width="52" height="31" alt="Mask Icon" />
+              </div>
+              <div class="toolkit__box__content">
+                <h3>
+                  <div class="toolkit__box__icon toolkit__mobile__icon">
+                    <img src="/assets/img/mask.svg" width="52" height="31" alt="Mask Icon" />
+                  </div>
+                  <span>Masks</span>
+                </h3>
+                <p>Wear a mask to protect yourself and others when you go indoors in public.</p>
+                <p>Free N95 masks are available at many local pharmacies and healthcare providers. Check with stores in your area to see where you can find free masks.</p>
+                <a href="https://www.cdc.gov/coronavirus/2019-ncov/prevent-getting-sick/masks.html" rel="noopener">Learn more about masks and where to get them</a>
+              </div>
+            </div>
+            <div class="toolkit__box">
+              <div class="toolkit__box__icon toolkit__desktop__icon">
+                <img src="/assets/img/treatment.svg" width="38" height="38" alt="Medical Icon" />
+              </div>
+              <div class="toolkit__box__content">
+                <h3>
+                  <div class="toolkit__box__icon toolkit__mobile__icon">
+                    <img src="/assets/img/treatment.svg" width="38" height="38" alt="Medical Icon" />
+                  </div>
+                  <span>Treatment</span>
+                </h3>
+                <p>Treatments for COVID-&#8288;19 are now widely available. If you test positive for COVID-19, talk to a doctor as soon as possible about <a href="https://www.cdc.gov/coronavirus/2019-ncov/your-health/treatments-for-severe-illness.html" class="usa-link usa-link--external" rel="noopener">treatment options</a>.</p>
+                <p>The Test-to-Treat program is one easy way to get treatment. Test-to-Treat locations will give you a test and treatment.</p>
+                <a href="https://COVID-&#8288;19-test-to-treat-locator-dhhs.hub.arcgis.com" rel="noopener">Find a Test-to-Treat location near you</a>
+              </div>
+            </div>
+            <div class="toolkit__box">
+              <div class="toolkit__box__icon toolkit__desktop__icon">
+                <img src="/assets/img/syringe.svg" class="small" width="47" height="55" alt="Syringe Icon" />
+              </div>
+              <div class="toolkit__box__content">
+                <h3>
+                  <div class="toolkit__box__icon toolkit__mobile__icon">
+                    <img src="/assets/img/syringe.svg" class="small" width="47" height="55" alt="Syringe Icon" />
+                  </div>
+                  <span>Vaccines</span>
+                </h3>
+                <p>Being fully vaccinated and boosted is the best way to protect against severe illness and hospitalization from COVID-&#8288;19.</p>
+                <a href="https://vaccines.gov/search" rel="noopener">Find a vaccine or booster at vaccines.gov</a>
+              </div>
+            </div>
+            <div class="toolkit__box">
+              <div class="toolkit__box__icon toolkit__desktop__icon">
+                <img src="/assets/img/beaker.svg" width="32" height="42" alt="Beaker Icon" />
+              </div>
+              <div class="toolkit__box__content">
+                <h3>
+                  <div class="toolkit__box__icon toolkit__mobile__icon">
+                    <img src="/assets/img/beaker.svg" width="32" height="42" alt="Beaker Icon" />
+                  </div>
+                  <span>Testing</span>
+                </h3>
+                <p>COVID tests can help you know if you have COVID-&#8288;19 when you have symptoms, have been exposed, or are about to meet up with others.</p>
+                <a href="/tests" rel="noopener">Order free tests</a>
+              </div>
+            </div>
+          </div>
+          <div class="toolkit__intro">
+            <p>Have toolkit questions?<br>Call <a href="tel:1-800-232-0233">1-800-232-0233</a> (TTY 1-888-720-7489)</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="resources">
+      <div class="resources__wrap">
+        <h2 class="resources__more">More Resources</h2>
+        <div class="resources__boxes across-2">
+          <div class="resources__box">
+            <h3>Symptoms and care</h3>
+            <p>
+              The latest guidance on what to do if you or your family are sick.
+            </p>
+            <a href="https://www.cdc.gov/coronavirus/2019-ncov/your-health/quarantine-isolation.html" rel="noopener">Learn more about symptoms and care</a>
+          </div>
+          <div class="resources__box">
+            <h3>Immunocompromised</h3>
+            <p>
+              The latest guidance for those who are immunocompromised, including where to get preventative treatment.
+            </p>
+            <a href="https://www.cdc.gov/coronavirus/2019-ncov/need-extra-precautions/people-with-medical-conditions.html#immunocompromised" rel="noopener">More resources for people who are immunocompromised</a>
+          </div>
+        </div>
+        <div class="resources__boxes across-2">
+          <div class="resources__box">
+            <h3>Travel</h3>
+            <p>
+              The latest guidance on rules and restrictions, so you can plan ahead before travel.
+            </p>
+            <a href="https://www.cdc.gov/coronavirus/2019-ncov/travelers/index.html" rel="noopener">Learn more about travel</a>
+          </div>
+          <div class="resources__box">
+            <h3>At-home testing</h3>
+            <p>
+              The latest guidance on using at-home tests, what to do with the results, and how to get at-home tests.
+            </p>
+            <a href="https://www.cdc.gov/coronavirus/2019-ncov/testing/self-testing.html" rel="noopener">Learn more about at-home testing</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="usa-footer usa-footer--big">
+    <div class="usa-identifier padding-top-3">
+      <section
+        class="usa-identifier__section usa-identifier__section--masthead"
+        aria-label="Agency identifier,"
+      >
+        <div class="usa-identifier__container">
+          <div class="usa-identifier__logos">
+            <a href="" class="usa-identifier__logo"
+              ><img
+                class="usa-identifier__logo-img"
+                src="/assets/img/covidtest/hhs-logo.svg"
+                alt="Department of Health and Human Services logo"
+                role="img"
+            /></a>
+          </div>
+          <div class="usa-identifier__identity" aria-label="Agency description">
+            <p class="usa-identifier__identity-domain">covid.gov</p>
+            <p class="usa-identifier__identity-disclaimer">
+              An official website of the <a href="https://hhs.gov" rel="noopener">Department of Health and Human Services</a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div class="usa-footer__primary-section">
+      <div class="grid-container border-top border-bottom">
+        <div class="grid-row grid-gap">
+          <div class="tablet:grid-col-10">
+            <nav class="usa-footer__nav" aria-label="Footer navigation,,">
+              <div class="grid-row grid-gap-4">
+                <div class="mobile-lg:grid-col-4">
+                  <section
+                    class="
+                      usa-footer__primary-content
+                      usa-footer__primary-content--collapsible
+                    "
+                  >
+                    <p class="usa-footer__primary-link">COVID-&#8288;19 Response</p>
+                    <ul class="usa-list usa-list--unstyled">
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://vaccines.gov" rel="noopener">vaccines.gov</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://wecandothis.hhs.gov" rel="noopener">wecandothis.hhs.gov</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://cdc.gov/coronavirus" rel="noopener"
+                          >cdc.gov/coronavirus</a
+                        >
+                      </li>
+                    </ul>
+                  </section>
+                  <section
+                    class="
+                      usa-footer__primary-content
+                      usa-footer__primary-content--collapsible
+                    "
+                  >
+                    <p class="usa-footer__primary-link">HHS Resources</p>
+                    <ul class="usa-list usa-list--unstyled">
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://www.hhs.gov/about/index.html" rel="noopener">About HHS</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://www.hhs.gov/answers/" rel="noopener">HHS FAQs</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://www.hhs.gov/about/archive/index.html" rel="noopener">HHS Archive</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://www.hhs.gov/guidance/" rel="noopener">HHS Guidance Portal</a>
+                      </li>
+                    </ul>
+                  </section>
+                </div>
+                <div class="mobile-lg:grid-col-4">
+                  <section
+                    class="
+                      usa-footer__primary-content
+                      usa-footer__primary-content--collapsible
+                    "
+                  >
+                    <p class="usa-footer__primary-link">Policies & Support</p>
+                    <ul class="usa-list usa-list--unstyled">
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://www.hhs.gov/web/policies-and-standards/hhs-web-policies/accessibility/index.html" rel="noopener">Accessibility</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://www.hhs.gov/foia/" rel="noopener"
+                          >FOIA requests</a
+                        >
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://www.hhs.gov/about/agencies/asa/eeo/resources/no-fear-act/index.html" rel="noopener">No FEAR Act Data</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://oig.hhs.gov/" rel="noopener">Office of Inspector General</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://www.hhs.gov/about/budget/index.html" rel="noopener">Performance Reports</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://www.hhs.gov/privacy.html" rel="noopener">Privacy Policy</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://www.hhs.gov/vulnerability-disclosure-policy/index.html" rel="noopener">Vulnerability Disclosure Policy</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://www.hhs.gov/web/policies-and-standards/hhs-web-policies/plugins/index.html" rel="noopener">Viewers & Players</a>
+                      </li>
+                    </ul>
+                  </section>
+                </div>
+                <div class="mobile-lg:grid-col-4">
+                  <section
+                    class="
+                      usa-footer__primary-content
+                      usa-footer__primary-content--collapsible
+                    "
+                  >
+                    <p class="usa-footer__primary-link">Contact Info</p>
+                    <ul class="usa-list usa-list--unstyled">
+                      <li class="usa-footer__secondary-link">
+                        200 Independence Ave., S.W.<br>Washington, DC 20201
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="tel:1-877-696-6775">1-877-696-6775</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://www.hhs.gov/about/contact-us/index.html" rel="noopener">Contact Us</a>
+                      </li>
+                    </ul>
+                  </section>
+                  <section
+                    class="
+                      usa-footer__primary-content
+                      usa-footer__primary-content--collapsible
+                    "
+                  >
+                    <p class="usa-footer__primary-link">Connect with Us</p>
+                    <ul class="usa-list usa-list--unstyled">
+                      <li class="usa-footer__secondary-link">
+                        <a href="https://cloud.connect.hhs.gov/subscriptioncenter">Sign Up for Email Updates</a>
+                      </li>
+                      <li class="usa-footer__secondary-link">
+                        <a class="padding-right-1" href="https://www.facebook.com/HHS"><img
+                            class="usa-icon--size-3"
+                            src="/assets/img/usa-icons/facebook.svg"
+                            alt="Facebook"
+                          /></a>
+                        <a class="padding-right-1" href="https://www.instagram.com/hhsgov/"><img
+                            class="usa-icon--size-3"
+                            src="/assets/img/usa-icons/instagram.svg"
+                            alt="Instagram"
+                          /></a>
+                        <a href="https://twitter.com/hhsgov"><img
+                            class="usa-icon--size-3"
+                            src="/assets/img/usa-icons/twitter.svg"
+                            alt="Twitter"
+                          /></a>
+                      </li>
+                    </ul>
+                </section>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="usa-identifier">
+      <section
+        class="usa-identifier__section usa-identifier__section--usagov"
+        aria-label="U.S. government information and services,"
+      >
+        <div class="usa-identifier__container">
+          <div class="usa-identifier__usagov-description">
+            Looking for U.S. government information and services?
+          </div>
+          <a href="https://www.usa.gov/" class="usa-link">Visit USA.gov</a>
+        </div>
+      </section>
+    </div>
+  </footer>
+
+  <script src="/assets/js/accessible-autocomplete.min.js?ver=1.13"></script>
+  <script src="/assets/js/global.min.js?ver=1.13"></script>
+  <script src="/assets/js/main.min.js?ver=1.13"></script>
+  <script src="/assets/js/uswds.min.js?ver=1.13"></script>
+</body>
+</html>

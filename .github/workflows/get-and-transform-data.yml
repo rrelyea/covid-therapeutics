@@ -45,6 +45,19 @@ jobs:
         timestamp=$(date -u)
         git commit -m "Latest therapeutics data: ${timestamp}" || exit 0
         git push
+
+    - name: Capture latest covid.gov
+      run: |-
+        curl "https://www.covid.gov" > data/covid-info/covid.gov/index.html
+    - name: Commit and push if it changed
+      run: |-
+        git config user.name "Automated"
+        git config user.email "actions@users.noreply.github.com"
+        git add -A
+        timestamp=$(date -u)
+        git commit -m "Latest covid.gov: ${timestamp}" || exit 0
+        git push
+        
     - name: Update zip code inventory history for all mAbs
       run: |-
         python src/extract-dose-history.py
