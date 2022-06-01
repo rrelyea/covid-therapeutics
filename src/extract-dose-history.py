@@ -119,7 +119,7 @@ def updateZipCodeFilesForDrug(therapeuticsSubfolder, drugs, sortedUrls, lastProc
           provider = columns[0]
           if "," in provider:
             provider = '"' + provider + '"'
-          if zip == "98004" and zip == zipCode and columns[8] in drugs:
+          if zip != "98004" and zip == zipCode and columns[8] in drugs:
             index = drugs.index(columns[8])
             drugShortName = columns[8].replace(' ','-').lower()
             if drugShortName.endswith('-(molnupiravir)'):
