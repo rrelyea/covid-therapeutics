@@ -104,9 +104,6 @@ def updateZipCodeFilesForDrug(therapeuticsSubfolder, drugs, sortedUrls, lastProc
 
     print('zip codes for ' + mabsFile + ': ' + str(len(zipSet)), flush=True)
     for zipCode in sorted(zipSet):
-      # for testing only do 1 zip code
-      # if zipCode != "98004":
-      #   continue
       zipFile = [None] * len(drugs)
       filename = getFilenameFromUrl(url)
       therapeuticsFile = publishEventsPath + filename
@@ -119,7 +116,7 @@ def updateZipCodeFilesForDrug(therapeuticsSubfolder, drugs, sortedUrls, lastProc
           provider = columns[0]
           if "," in provider:
             provider = '"' + provider + '"'
-          if zip != "98004" and zip == zipCode and columns[8] in drugs:
+          if zip == zipCode and columns[8] in drugs:
             index = drugs.index(columns[8])
             drugShortName = columns[8].replace(' ','-').lower()
             if drugShortName.endswith('-(molnupiravir)'):
