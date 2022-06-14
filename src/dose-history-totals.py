@@ -1,19 +1,26 @@
 from fileinput import filename
 import json
 from io import StringIO
-import os
-import sys
 from os.path import exists
-import requests
 from urllib.parse import urlparse
 import csv
 from datetime import date
 import math
 
 # loop through all providers. walk through dose data stored in zip codes. figure out doses given each week per provider and per state.
-  # put state data in therapeutics\<drugName>\doses-given-per-week\all.csv
-    # state, week1, week2, ..., weekLatest
+  # put state data in therapeutics\<drugName>\doses-given-per-week.csv
 
+  # state = state or territory abbreviation
+  # dosesGiven = cumulative number of doses given in that state/territory since healthdata.gov started publishing data on 12/28/2021.
+  # dosesGivenPerWeek = sample: "7:0,8:0,9:4,10:5,12:6,13:7,14:3,15:5,16:2,17:4,18:12,19:13,20:28,21:4,22:1,23:4,24:7,25:3,26:8,27:0"
+  #                     during week #7, 0 doses were given. during week 26, 8 doses were given. highest week # is usually the current week, which will have partial results.
+  #                     ignore week 55...some states have a week #55, which I haven't debugged yet.
+  # population = state/territory/usa population - source is https://www2.census.gov/programs-surveys/popest/datasets/2020-2021/state/totals/NST-EST2021-alldata.csv
+  # IC_Adults_Estimated = population * .027 * .779
+  #                       AMA says 2.7% of US population is immunocompromised: https://www.ama-assn.org/delivering-care/public-health/what-tell-immunocompromised-patients-about-covid-19-vaccines
+  #                       Census.gov says 77.9% of US population are adults: https://www.census.gov/library/visualizations/interactive/adult-and-under-the-age-of-18-populations-2020-census.html
+  # PercentICAdultsProtected = dosesGiven / IC_Adults_Estimated * 100
+  
 def get5digitZip(rawZip):
   if len(rawZip) == 3:
     return '00' + rawZip
