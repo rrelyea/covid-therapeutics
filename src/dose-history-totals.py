@@ -20,6 +20,7 @@ import math
   #                       AMA says 2.7% of US population is immunocompromised: https://www.ama-assn.org/delivering-care/public-health/what-tell-immunocompromised-patients-about-covid-19-vaccines
   #                       Census.gov says 77.9% of US population are adults: https://www.census.gov/library/visualizations/interactive/adult-and-under-the-age-of-18-populations-2020-census.html
   # PercentICAdultsProtected = dosesGiven / IC_Adults_Estimated * 100
+  # AvailableDoses = total doses reported in latest provider inventory reports
   
 def get5digitZip(rawZip):
   if len(rawZip) == 3:
@@ -157,9 +158,11 @@ def createProviderAndStateDoseHistoryFiles(localBasePath, drugsJson):
     stateDosesByWeek = {}
     nationalDosesByWeek = {}
     dosesTotal = 0
+    availableTotal = 0
+    availablePerState = 0
     providersTotal = 0
     with open(localBasePath + "data/therapeutics/"+ drugName + "/doses-given-per-week.csv", "w", encoding="utf-8") as outputFile:
-      outputFile.write("state, dosesGiven, dosesGivenPerWeek, population, IC_Adults_Estimated, PercentICAdultsProtected\n")
+      outputFile.write("state, dosesGiven, dosesGivenPerWeek, population, IC_Adults_Estimated, PercentICAdultsProtected, availableDoses\n")
       with open(localBasePath + "data/therapeutics/" + drugName + "/" + drugName +"-providers.csv", "r", encoding="utf-8") as therapeuticsFile:
         providerList = csv.reader(therapeuticsFile)
         for provider in providerList:
@@ -167,11 +170,13 @@ def createProviderAndStateDoseHistoryFiles(localBasePath, drugsJson):
           state = provider[5]
           if state != lastState:
             if not (lastState == None or lastState == '' or lastState == 'state_code'):
-              outputFile.write(lastState +","+  str(dosesPerState)+",\""+ weekOrder(stateDosesByWeek) +"\","+getPop(lastState, popByStateCode)+"," +getICAdultEstimate(drugName, lastState, popByStateCode)+"," + getPercentICProtected(drugName, lastState, popByStateCode, dosesPerState) +"\n")
+              outputFile.write(lastState +"," + str(dosesPerState)+",\""+ weekOrder(stateDosesByWeek) +"\","+getPop(lastState, popByStateCode)+"," +getICAdultEstimate(drugName, lastState, popByStateCode)+"," + getPercentICProtected(drugName, lastState, popByStateCode, dosesPerState) + "," + str(availablePerState) +"\n")
             dosesTotal = dosesTotal + dosesPerState
             providersTotal = providersTotal + providersPerState
+            availableTotal = availableTotal + availablePerState
             dosesPerState = 0
             providersPerState = 0
+            availablePerState = 0
             nationalDosesByWeek = accumulateDosesByWeek(stateDosesByWeek, nationalDosesByWeek)
             stateDosesByWeek = {}
           providerName = provider[0]
@@ -183,12 +188,16 @@ def createProviderAndStateDoseHistoryFiles(localBasePath, drugsJson):
             if firstKey != 0 and firstKey != 'total' and (firstWeekPerDrug == None or firstKey < firstWeekPerDrug):
               firstWeekPerDrug = firstKey
             dosesPerState = dosesPerState + providerDosesByWeek['total']
+            if provider[9] != '':
+              availablePerState = availablePerState + int(float(provider[9]))
             providersPerState = providersPerState + 1
           lastState = state  
         if not (lastState == None or lastState == '' or lastState == 'state_code'):
-          outputFile.write(lastState+","+  str(dosesPerState)+",\""+  weekOrder(stateDosesByWeek) +"\","+getPop(lastState, popByStateCode)+","+getICAdultEstimate(drugName, lastState, popByStateCode)+"," + getPercentICProtected(drugName, lastState, popByStateCode, dosesPerState) +"\n")
+          outputFile.write(lastState+","+ str(dosesPerState)+",\""+  weekOrder(stateDosesByWeek) +"\","+getPop(lastState, popByStateCode)+","+getICAdultEstimate(drugName, lastState, popByStateCode)+"," + getPercentICProtected(drugName, lastState, popByStateCode, dosesPerState) + ","+ str(availablePerState) +"\n")
         dosesTotal = dosesTotal + dosesPerState
-        outputFile.write("USA"+","+  str(dosesTotal)+",\""+  weekOrder(nationalDosesByWeek) +"\","+getPop("USA", popByStateCode)+","+getICAdultEstimate(drugName, "USA", popByStateCode)+"," + getPercentICProtected(drugName, "USA", popByStateCode, dosesTotal) +"\n")
+        providersTotal = providersTotal + providersPerState
+        availableTotal = availableTotal + availablePerState
+        outputFile.write("USA"+"," + str(dosesTotal)+",\""+  weekOrder(nationalDosesByWeek) +"\","+getPop("USA", popByStateCode)+","+getICAdultEstimate(drugName, "USA", popByStateCode)+"," + getPercentICProtected(drugName, "USA", popByStateCode, dosesTotal) + "," + str(availableTotal) +"\n")
 
 localBasePath = ""
 createProviderAndStateDoseHistoryFiles(localBasePath, '{"Evusheld":24, "Paxlovid":20, "Sotrovimab":5, "Bebtelovimab":5, "Lagevrio (molnupiravir)":24, "Renal Paxlovid":10}')

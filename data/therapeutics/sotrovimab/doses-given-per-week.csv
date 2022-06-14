@@ -1,2 +1,2 @@
-state, dosesGiven, dosesGivenPerWeek, population, IC_Adults_Estimated, PercentICAdultsProtected
-USA,0,"",331449281,,
+state, dosesGiven, dosesGivenPerWeek, population, IC_Adults_Estimated, PercentICAdultsProtected, availableDoses
+USA,0,"",331449281,,,0
