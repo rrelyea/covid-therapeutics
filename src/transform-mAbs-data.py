@@ -2,7 +2,7 @@ import pandas as pd
 import sys
 
 def sortDataFile(fileName):
-  dataFile = pd.read_csv(fileName)
+  dataFile = pd.read_csv(fileName, dtype=object)
   print ("sorting: " + fileName)
   
   # ensure standard casing, so that sorting works better.
@@ -17,7 +17,7 @@ def sortDataFile(fileName):
   dataFile.to_csv(fileName, index=False)
 
 def sortTestToTreatFile(fileName):
-  dataFile = pd.read_csv(fileName)
+  dataFile = pd.read_csv(fileName, dtype=object)
   print ("sorting: " + fileName)
   
   # ensure standard casing, so that sorting works better.
