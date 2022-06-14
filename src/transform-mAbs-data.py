@@ -9,9 +9,9 @@ def sortDataFile(fileName):
   dataFile['city'] = dataFile['city'].str.title()
   dataFile['county'] = dataFile['county'].str.title()
 
-  dataFile.sort_values(["state_code", "county", "city", "provider_name"], 
+  dataFile.sort_values(["state_code", "county", "city", "provider_name", "address1"], 
                       axis=0,
-                      ascending=[True, True, True, True], 
+                      ascending=[True, True, True, True, True], 
                       inplace=True)
 
   dataFile.to_csv(fileName, index=False)
