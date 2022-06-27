@@ -1,0 +1,26 @@
+Name1
+1970
+Pfizer 4/25/2021
+Pfizer 5/15/2021
+Pfizer 12/3/2021
+Covid 4/5/2021
+Pfizer 5/27/2022
+
+Name2
+1971
+Immunocompromised
+Pfizer 4/25/2021
+Pfizer 5/15/2021
+Pfizer 12/3/2021
+
+Name3
+1999
+Pfizer 5/1/2021
+Pfizer 6/15/2021
+Pfizer 12/15/2021
+
+Name4
+2002
+Pfizer 4/26/2021
+Pfizer 5/16/2021
+Pfizer 12/15/2021

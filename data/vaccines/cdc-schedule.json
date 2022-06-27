@@ -1,0 +1,138 @@
+{
+    "updated": "6/16/2022",
+    "vaccineSchedules": 
+    [
+        { 
+            "vaccine": "Pfizer-BioNTech",
+            "schedules" : [
+                {
+                    "ages": "[.5,5)",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "3-8 weeks", "type" : "primary" },
+                        { "after": "8 weeks", "type" : "primary" }
+                    ]
+                },
+                {
+                    "ages": "[5,50)",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "3-8 weeks", "type" : "primary" },
+                        { "after": "5 months", "type" : "booster" }
+                    ]
+                },
+                {
+                    "ages": "[50,)",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "3-8 weeks", "type" : "primary" },
+                        { "after": "5 months", "type" : "booster" },
+                        { "after": "4 months", "type" : "booster" }
+                    ]
+                },
+                {
+                    "ages": "[.5,5)",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "3-3 weeks", "type" : "primary" },
+                        { "after": "8 weeks", "type" : "primary" }
+                    ]
+                },
+                {
+                    "ages": "[5,12)",
+                    "immunocompromised": "true",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "3-3 weeks", "type" : "primary" },
+                        { "after": "4 weeks", "type" : "primary" },
+                        { "after": "3 months", "type" : "booster" }
+                    ]
+                },
+                {
+                    "ages": "[12,)",
+                    "immunocompromised": "true",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "3-3 weeks", "type" : "primary" },
+                        { "after": "4 weeks", "type" : "primary" },
+                        { "after": "3 months", "type" : "booster" },
+                        { "after": "4 months", "type" : "booster" }
+                    ]
+                }
+            ]
+        },
+        {
+            "vaccine": "Moderna",
+            "schedules" : [
+                {
+                    "ages": "[.5,18)",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "4-8 weeks", "type" : "primary" }
+                    ]
+                },
+                {
+                    "ages": "[18,50)",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "4-8 weeks", "type" : "primary" },
+                        { "after": "5 months", "type" : "booster" }
+                    ]
+                },
+                {
+                    "ages": "[50,)",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "4-8 weeks", "type" : "primary" },
+                        { "after": "5 months", "type" : "booster" },
+                        { "after": "4 months", "type" : "booster" }
+                    ]
+                },
+                {
+                    "ages": "[.5,18)",
+                    "immunocompromised": "true",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "4-4 weeks", "type" : "primary" },
+                        { "after": "4 weeks", "type" : "primary" }
+                    ]
+                },
+                {
+                    "ages": "[18,)",
+                    "immunocompromised": "true",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "4-4 weeks", "type" : "primary" },
+                        { "after": "4 weeks", "type" : "primary" },
+                        { "after": "3 months", "type" : "booster" },
+                        { "after": "4 months", "type" : "booster" }
+
+                    ]
+                }
+            ]
+        },
+        {
+            "vaccine": "Janssen (J&J)",
+            "schedules" : [
+                {
+                    "ages": "[18,)",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "2 months", "type" : "booster" },
+                        { "after": "4 months", "type" : "booster" }
+                    ]
+                },
+                {
+                    "ages": "[18,)",
+                    "immunocompromised": "true",
+                    "doses": [
+                        { "type" : "primary" },
+                        { "after": "4-4 weeks", "type" : "additional mRNA dose" },
+                        { "after": "2 months", "type" : "booster" },
+                        { "after": "4 months", "type" : "booster" }
+                    ]
+                }
+            ]
+        }
+    ]
+}
