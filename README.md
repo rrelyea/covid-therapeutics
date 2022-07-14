@@ -1,10 +1,10 @@
 # Covid-Prevention Providers for Immunocompromosised
-- [rrelyea.github.io/evusheld](https://CovidSafe.fyi/evusheld) - healthdata.gov data powered
+- [CovidSafe.fyi/evusheld](https://CovidSafe.fyi/evusheld) - healthdata.gov data powered
 
 # Covid-Therapeutic Providers
-- [rrelyea.github.io/paxlovid](https://CovidSafe.fyi/paxlovid) - healthdata.gov data powered
-- [rrelyea.github.io/bebtelovimab](https://CovidSafe.fyi/bebtelovimab) - healthdata.gov data powered
-- [rrelyea.github.io/lagevrio](https://CovidSafe.fyi/lagevrio)  - healthdata.gov data powered
+- [CovidSafe.fyi/paxlovid](https://CovidSafe.fyi/paxlovid) - healthdata.gov data powered
+- [CovidSafe.fyi/bebtelovimab](https://CovidSafe.fyi/bebtelovimab) - healthdata.gov data powered
+- [CovidSafe.fyi/lagevrio](https://CovidSafe.fyi/lagevrio)  - healthdata.gov data powered
 
 # Where does this data comes from?
 HealthData.gov collects all medical facilities with Evusheld orders/inventory and publishes it to https://healthdata.gov/Health/COVID-19-Public-Therapeutic-Locator/rxn6-qnx8
