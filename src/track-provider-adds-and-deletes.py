@@ -81,5 +81,5 @@ def trackProviderAddsAndDeletes(localBasePath, dataRelativePath, drugs, stateInd
   return
 
 localBasePath = ""
-#trackProviderAddsAndDeletes(localBasePath, "therapeutics", ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab'], 5, 8)
-trackProviderAddsAndDeletes(localBasePath, "therapeutics/testToTreat/", ["testToTreat"] , 4, -1)
+trackProviderAddsAndDeletes(localBasePath, "therapeutics/", ['Evusheld', 'Paxlovid', 'Sotrovimab', 'Bebtelovimab'], 5, 8)
+#trackProviderAddsAndDeletes(localBasePath, "therapeutics/testToTreat/", ["testToTreat"] , 4, -1)
