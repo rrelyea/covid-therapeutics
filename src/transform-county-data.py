@@ -3,6 +3,7 @@ import os
 import sys
 from os.path import exists
 from pandas import to_numeric
+from requests import delete
 
 def getCounty(fullCountyName):
   county = before(fullCountyName, ",")[1:]
@@ -30,11 +31,26 @@ def after(value, a):
     if adjusted_pos_a >= len(value): return ""
     return value[adjusted_pos_a:]
 
+def shortenCounty(county):
+  if county != None:
+    cLen = len(county)
+    if county.endswith(" borough"):
+      cLen = cLen - 8
+    elif county.endswith(" parish"):
+      cLen = cLen - 7
+    elif county.endswith(" municipality"):
+      cLen = cLen - 13
+    elif county.endswith(" census area"):
+      cLen = cLen - 12
+    
+    county = county[0:cLen]
+
+  return county
+
 def createCountyAdjacenyFiles(localBasePath):
   with open(localBasePath + "data/counties/county_adjacency.txt", "r", encoding='utf8') as countiesFile:
     currentCounty = ""
     currentState = ""
-    currentCountyNumber = 0
     file = None
     lineNo = 0
     firstCountyInFile = False
@@ -64,6 +80,7 @@ def createCountyAdjacenyFiles(localBasePath):
         currentCounty = getCounty(chunks[0])
         currentState = getState(chunks[0])
         if currentState != lastState:
+          print("state: " + currentState)
           if countiesPerStateFile != None:
             countiesPerStateFile.close()
           countiesPerStateFilePath = countiesPerStatePath + currentState + ".csv"
@@ -74,7 +91,8 @@ def createCountyAdjacenyFiles(localBasePath):
         countiesPerStateFile.write('\n'+currentCounty)
 
         targetPath = localBasePath + "data/counties/adjacency/" + currentState + "/" 
-        countyFile = targetPath + currentCounty.lower() + ".csv" 
+        longCountyFile = targetPath + currentCounty.lower() + ".csv" 
+        shortenCountyFile = targetPath + shortenCounty(currentCounty.lower()) + ".csv" 
         if currentCounty == "":
           print("while processing line# " + str(lineNo) + " in county: " + currentCounty + ", " + currentState)
         while not os.path.exists(targetPath):
@@ -84,7 +102,7 @@ def createCountyAdjacenyFiles(localBasePath):
           os.fsync(file)
           file.close()
         file = None
-        file = open(countyFile, 'w')
+        file = open(shortenCountyFile, 'w')
         firstCountyInFile = True
       try:
         adjacentCounty = getCounty(chunks[2])
